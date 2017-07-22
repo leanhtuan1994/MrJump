@@ -1,0 +1,29 @@
+<Solution>
+  <PropertyGroup Name="MrJump" Version="3.10.0.0" Type="CocosStudio" />
+  <SolutionFolder>
+    <Group ctype="ResourceGroup">
+      <RootFolder Name=".">
+        <Folder Name="assets">
+          <Image Name="Asset 10.png" />
+          <Image Name="Asset 11.png" />
+          <Image Name="Asset 12.png" />
+          <Image Name="Asset 2.png" />
+          <Image Name="Asset 3.png" />
+          <Image Name="Asset 4.png" />
+          <Image Name="Asset 5.png" />
+          <Image Name="Asset 6.png" />
+          <Image Name="Asset 7.png" />
+          <Image Name="Asset 8.png" />
+          <Image Name="Asset 9.png" />
+          <Image Name="MrJump Icon.png" />
+          <Image Name="settingnormalicon.png" />
+          <Image Name="settingselectedicon.png" />
+          <Image Name="TapToPlay.png" />
+        </Folder>
+        <Project Name="GameScene.csd" Type="Scene" />
+        <TmxFile Name="level1.tmx" />
+        <Project Name="MainMenuScene.csd" Type="Scene" />
+      </RootFolder>
+    </Group>
+  </SolutionFolder>
+</Solution>
