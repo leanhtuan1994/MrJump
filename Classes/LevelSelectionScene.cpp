@@ -46,7 +46,7 @@ bool LevelSelectionScene::init()
 		case cocos2d::ui::Widget::TouchEventType::ENDED:
 			auto userdefault = UserDefault::getInstance();
 			userdefault->setIntegerForKey("Level", 1);
-			Director::getInstance()->replaceScene(TransitionFade::create(TRANSITION_TIME, GameScene::createScene()));
+			Director::getInstance()->replaceScene(TransitionMoveInB::create(TRANSITION_TIME, GameScene::createScene()));
 			break;
 		}
 	});
