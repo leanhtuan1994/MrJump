@@ -53,8 +53,11 @@ bool GameScene::init()
 
 	player = Player::create();
 	this->addChild(player, TAG_ZORDER::PLAYER);
+	
+	/* set position of player */
+	Point playerPosition = player->getPositionTiled(level->getMapLevel());
+	player->setPosition(playerPosition.x, playerPosition.y);
 
-	player->setPosition(visibleSize.width / 2 + origin.x, visibleSize.height / 2 + origin.y);
 
 	
 	this->scheduleUpdate();

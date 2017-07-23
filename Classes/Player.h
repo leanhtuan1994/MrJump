@@ -12,6 +12,8 @@ public:
 
 	static Player* create();
 
+	cocos2d::Point getPositionTiled( cocos2d::TMXTiledMap *tileMap);
+
 	
 
 };

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" tiledversion="1.0.2" orientation="orthogonal" renderorder="right-down" width="100" height="15" tilewidth="50" tileheight="50" nextobjectid="1">
+<map version="1.0" tiledversion="1.0.2" orientation="orthogonal" renderorder="right-down" width="100" height="15" tilewidth="50" tileheight="50" nextobjectid="7">
  <tileset firstgid="1" name="titeBackground" tilewidth="50" tileheight="50" tilecount="690" columns="46">
   <image source="titeBackground.png" width="2334" height="750"/>
  </tileset>
@@ -49,4 +49,7 @@
    eJztmGlOwzAQhUOTCCS2UxSK2G5AL5ReiBwKCoLQcooA/ckyo8TKaDTjOsEYF/Gkp1ZZLM37PLbbJPlZVaPGT+Bx2nzfTbtrC/AS/Nw+Nyb36pH83L+Gy/CQuKzjoXGLXVdZkkwzf8/5lJSnKw/tuekv1OEqk/Fsw3lUPXm41BtaJl90uaE86GftyGMWaX/Q3oiRh5Ql+kjhgfuFYcB7xWd/3MC7t+A5+A587yET3huheSxgnKUw1gNcewRXmZzlysID88d7Ul68P1zq1fQO736AP3GMPEm28uFjoTBX3hsue5xPHttQw45QRwrXMnCeN+vPC/gV/NayOEw7HpXCQ8qL9pfr/NN0CuOdgc/BF+DLb/IoCI+yZWJsyzv0eoXrzx54H3yQNixOCI+a8dDWN+qVBx6+Ja1VJWGz7r1QMvP9GDxpWdiylrLnRqYxsUBpZ9xry7yhDEPKNuelvHn23Mg0NhU9zlRGfX6n+JLGwpY3z547tt5A2fpAEz0DhBLfsykXLW9qvtYNqTtWYU8VgfujHnXm/2PZWE2Udekv8cBaQtbjclayOcZ9IoS+ABcRCkw=
   </data>
  </layer>
+ <objectgroup name="playerObjects">
+  <object id="5" name="player" x="200" y="87.8788" width="72.7273" height="57.5758"/>
+ </objectgroup>
 </map>

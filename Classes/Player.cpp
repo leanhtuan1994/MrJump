@@ -24,4 +24,14 @@ Player * Player::create() {
 	return playerNode;
 }
 
+cocos2d::Point Player::getPositionTiled(cocos2d::TMXTiledMap *tileMap) {
+	Point playerPosition;
+	TMXObjectGroup *playerObjects = tileMap->getObjectGroup("playerObjects");
+	auto playerOb = playerObjects->getObject("player");
+	if (!playerOb.empty()) {		
+		playerPosition.x = playerOb["x"].asInt();
+		playerPosition.y = playerOb["y"].asInt();
+	}
+	return playerPosition;
+}
 
