@@ -33,8 +33,13 @@ private:
 
 	MrJump *mrJump;
 
+	cocos2d::Node *edgeNode;
 	cocos2d::Size visibleSize;
 	cocos2d::Vec2 origin;
+
+	// create camera 
+	cocos2d::Follow *camera;
+	cocos2d::Sprite *cameraTarget;
 };
 
 #endif // __GAME_SCENE_H__

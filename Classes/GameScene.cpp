@@ -56,15 +56,13 @@ bool GameScene::init()
 	this->addChild(level->getMapLevel(), TAG_ZORDER::MAP);
 
 	/* init box for world */ 
-	auto edgeBody = PhysicsBody::createEdgeBox(cocos2d::Size( visibleSize.width, 50), PHYSICSSHAPE_MATERIAL_DEFAULT, 3.0F);
+	int bodyHeight = level->getMapLevel()->getMapSize().width * level->getMapLevel()->getTileSize().width;
+	auto edgeBody = PhysicsBody::createEdgeBox(cocos2d::Size( visibleSize.width+ origin.x, visibleSize.height + origin.y), PHYSICSSHAPE_MATERIAL_DEFAULT, 3.0F);
 	edgeBody->setDynamic(false);
-	auto edgeNode = Node::create();
-	edgeNode->setPosition(Vec2(visibleSize.width / 2 + origin.x,  origin.y));
+	edgeNode = Node::create();
+	edgeNode->setPosition( visibleSize.width /2 + origin.x , visibleSize.height/2 + origin.y);
 	edgeNode->setPhysicsBody(edgeBody);
 	this->addChild(edgeNode);
-
-
-
 
 	/* init player object */
 	mrJump = MrJump::create();
@@ -74,13 +72,17 @@ bool GameScene::init()
 
 	mrJump->getPhysicsBody()->setDynamic(true);
 	this->addChild(mrJump, TAG_ZORDER::PLAYER);
+	//	mrJump->runAction(mrJump->runing());
 
-	// run action 
-//	mrJump->runAction(mrJump->runing());
-	
+	/* init camera */
+	cameraTarget = cocos2d::Sprite::create();
+	cameraTarget->setPosition( visibleSize.width/2 + origin.x, visibleSize.height / 2 + origin.y);
+	cameraTarget->retain();
+	this->addChild(cameraTarget);
 
-
-
+	camera = cocos2d::Follow::create(cameraTarget, cocos2d::Rect::ZERO);
+	camera->retain();
+	this->runAction(camera);
 	
 	this->scheduleUpdate();
 
@@ -90,4 +92,8 @@ bool GameScene::init()
 
 void GameScene::update(float delta) {
 	mrJump->setPositionX(mrJump->getPositionX() + 3);
+
+	// Update position camera and edgeNode follow mrJump
+	cameraTarget->setPositionX(visibleSize.width / 2  + origin.x > mrJump->getPositionX() ? visibleSize.width/2 + origin.x : mrJump->getPositionX());
+	edgeNode->setPositionX( cameraTarget->getPositionX());
 }

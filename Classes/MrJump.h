@@ -16,6 +16,8 @@ public:
 
 	cocos2d::RepeatForever *runing();
 
+
+
 };
 
 #endif // __PLAYER_H__
