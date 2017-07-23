@@ -10,10 +10,13 @@ using namespace cocostudio::timeline;
 Scene* GameScene::createScene()
 {
     // 'scene' is an autorelease object
-    auto scene = Scene::create();
+	auto scene = Scene::createWithPhysics(); 
+	scene->getPhysicsWorld()->setDebugDrawMask(PhysicsWorld::DEBUGDRAW_ALL);
+
     
     // 'layer' is an autorelease object
 	auto layer = GameScene::create();
+	layer->setPhysicsWorld(scene->getPhysicsWorld());
 
     // add layer as a child to scene
     scene->addChild(layer);
@@ -35,8 +38,8 @@ bool GameScene::init()
     }
 
 	/* Get size */
-	Size visibleSize = Director::getInstance()->getVisibleSize();
-	Vec2 origin = Director::getInstance()->getVisibleOrigin();
+	visibleSize = Director::getInstance()->getVisibleSize();
+	origin = Director::getInstance()->getVisibleOrigin();
 
 	/*  Get level selected */
 	auto userdefault = UserDefault::getInstance();
@@ -49,14 +52,14 @@ bool GameScene::init()
 		level->retain();
 	}
 	this->addChild(level->getMapLevel(), TAG_ZORDER::MAP);
-	
 
-	player = Player::create();
-	this->addChild(player, TAG_ZORDER::PLAYER);
-	
-	/* set position of player */
+
+	player = MrJump::create();
 	Point playerPosition = player->getPositionTiled(level->getMapLevel());
 	player->setPosition(playerPosition.x, playerPosition.y);
+	this->addChild(player, TAG_ZORDER::PLAYER);
+	player->runAction(player->runing());
+	
 
 
 	
@@ -67,5 +70,5 @@ bool GameScene::init()
 
 
 void GameScene::update(float delta) {
-//	playerNode->setPositionX(playerNode->getPositionX() + 3);
+
 }

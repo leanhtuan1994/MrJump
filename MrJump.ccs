@@ -18,6 +18,10 @@
           <Image Name="Asset 8.png" />
           <Image Name="Asset 9.png" />
           <Image Name="black_opacity.png" />
+          <Image Name="chan 1.png" />
+          <Image Name="chan 2.png" />
+          <Image Name="dau.png" />
+          <Image Name="Jump.png" />
           <Image Name="key.png" />
           <Image Name="level1_name.png" />
           <Image Name="Level1Selection.png" />
@@ -26,18 +30,15 @@
           <Image Name="Level3Selection.png" />
           <Image Name="Lock.png" />
           <Image Name="MrJump Icon.png" />
+          <Image Name="quan.png" />
           <Image Name="settingnormalicon.png" />
           <Image Name="settingselectedicon.png" />
           <Image Name="TapToPlay.png" />
-          <Image Name="WorldButtonNormal.png" />
-          <Image Name="WorldButtonSelected.png" />
-          <Image Name="chan 1.png" />
-          <Image Name="chan 2.png" />
-          <Image Name="dau.png" />
-          <Image Name="quan.png" />
           <Image Name="tay 1.png" />
           <Image Name="tay 2.png" />
           <Image Name="than.png" />
+          <Image Name="WorldButtonNormal.png" />
+          <Image Name="WorldButtonSelected.png" />
         </Folder>
         <Project Name="GameScene.csd" Type="Scene" />
         <Project Name="LevelSelectionScene.csd" Type="Scene" />

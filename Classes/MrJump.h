@@ -3,18 +3,18 @@
 
 #include "cocos2d.h"
 
-class Player : public cocos2d::Node
+class MrJump : public cocos2d::Sprite
 {
 public:
 
-	Player();		
-	virtual ~Player();
+	MrJump();		
+	virtual ~MrJump();
 
-	static Player* create();
+	static MrJump* create();
 
 	cocos2d::Point getPositionTiled( cocos2d::TMXTiledMap *tileMap);
 
-	
+	cocos2d::RepeatForever *runing();
 
 };
 

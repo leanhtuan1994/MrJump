@@ -3,7 +3,7 @@
 
 #include "cocos2d.h"
 #include "Level.h"	  
-#include "Player.h"
+#include "MrJump.h"
 
 class GameScene : public cocos2d::Layer
 {
@@ -23,11 +23,18 @@ public:
 
 private:
 
+	cocos2d::PhysicsWorld*	sceneWorld;
+	void setPhysicsWorld(cocos2d::PhysicsWorld* newWorld) {
+		this->sceneWorld = newWorld;
+	}
+
 	Level *level;
 	int currentLevelSelected;
 
-	Player *player;
+	MrJump *player;
 
+	cocos2d::Size visibleSize;
+	cocos2d::Vec2 origin;
 };
 
 #endif // __GAME_SCENE_H__
