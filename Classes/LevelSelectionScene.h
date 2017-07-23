@@ -1,10 +1,12 @@
-#ifndef __GAME_SCENE_H__
-#define __GAME_SCENE_H__
+#ifndef __LEVE_SELECTION_SCENE_H__
+#define __LEVE_SELECTION_SCENE_H__
 
 #include "cocos2d.h"
-#include "Level.h"
+#include "cocostudio/CocoStudio.h"
+#include "ui/CocosGUI.h"
 
-class GameScene : public cocos2d::Layer
+
+class LevelSelectionScene : public cocos2d::Layer
 {
 public:
     // there's no 'id' in cpp, so we recommend returning the class instance pointer
@@ -14,19 +16,15 @@ public:
     virtual bool init();
 
     // implement the "static create()" method manually
-	CREATE_FUNC(GameScene);
+	CREATE_FUNC(LevelSelectionScene);
 
 
-	void update(float delta);
-
+	void gotoGameScene();
 
 private:
-
-	Level *level;
-	int currentLevelSelected;
-
-	cocos2d::Node *playerNode;
-
+	
+	cocos2d::ui::PageView *pageView;
+	cocos2d::ui::Layout *panelLevel1;
 };
 
-#endif // __GAME_SCENE_H__
+#endif // __LEVE_SELECTION_SCENE_H__

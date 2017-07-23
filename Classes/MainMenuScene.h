@@ -18,6 +18,9 @@ public:
 
 	void update(float delta);
 
+	bool onTouchBegan(cocos2d::Touch *touch, cocos2d::Event *unused_event);
+	void gotoLevelSelectionScene();
+
 
 private:
 	cocos2d::Sprite *tapTopPlay;

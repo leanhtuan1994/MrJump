@@ -4,7 +4,20 @@
 
 
 #define TRANSITION_TIME 0.2f
+#define TRANSITION_TIME_MOVE_IN_R 0.4f
 #define DISPLAY_TIME_SPLASH_SCENE 0.3f
+
+
+enum LEVEL_NAME {
+	LEVEL_1 = 1,
+	LEVEL_2
+};
+
+enum TAG_ZORDER {
+	UI, 
+	MAP,
+	PLAYER
+};
 
 
 #endif // __DEFINITIONS_H__

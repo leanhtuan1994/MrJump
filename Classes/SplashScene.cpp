@@ -44,7 +44,6 @@ bool SplashScene::init()
 
 
 void SplashScene::gotoMainMenuScene(float dt) {
-	//auto scene = MainMenuScene::createScene();
-	auto scene = GameScene::createScene();
+	auto scene = MainMenuScene::createScene();
 	Director::getInstance()->replaceScene(TransitionFade::create(TRANSITION_TIME, scene));
 }

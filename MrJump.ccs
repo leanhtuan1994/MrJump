@@ -9,20 +9,40 @@
           <Image Name="Asset 12.png" />
           <Image Name="Asset 2.png" />
           <Image Name="Asset 3.png" />
+          <Image Name="Asset 36.png" />
+          <Image Name="Asset 37.png" />
           <Image Name="Asset 4.png" />
           <Image Name="Asset 5.png" />
           <Image Name="Asset 6.png" />
           <Image Name="Asset 7.png" />
           <Image Name="Asset 8.png" />
           <Image Name="Asset 9.png" />
+          <Image Name="black_opacity.png" />
+          <Image Name="key.png" />
+          <Image Name="level1_name.png" />
+          <Image Name="Level1Selection.png" />
+          <Image Name="level2_name.png" />
+          <Image Name="Level2Selection.png" />
+          <Image Name="Level3Selection.png" />
+          <Image Name="Lock.png" />
           <Image Name="MrJump Icon.png" />
           <Image Name="settingnormalicon.png" />
           <Image Name="settingselectedicon.png" />
           <Image Name="TapToPlay.png" />
+          <Image Name="WorldButtonNormal.png" />
+          <Image Name="WorldButtonSelected.png" />
+          <Image Name="chan 1.png" />
+          <Image Name="chan 2.png" />
+          <Image Name="dau.png" />
+          <Image Name="quan.png" />
+          <Image Name="tay 1.png" />
+          <Image Name="tay 2.png" />
+          <Image Name="than.png" />
         </Folder>
         <Project Name="GameScene.csd" Type="Scene" />
-        <TmxFile Name="level1.tmx" />
+        <Project Name="LevelSelectionScene.csd" Type="Scene" />
         <Project Name="MainMenuScene.csd" Type="Scene" />
+        <Project Name="Player.csd" Type="Skeleton" />
       </RootFolder>
     </Group>
   </SolutionFolder>

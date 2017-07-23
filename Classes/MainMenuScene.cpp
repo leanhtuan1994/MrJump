@@ -1,4 +1,6 @@
 #include "MainMenuScene.h"
+#include "LevelSelectionScene.h"
+#include "Definitions.h"
 #include "cocostudio/CocoStudio.h"
 #include "ui/CocosGUI.h"
 
@@ -43,10 +45,18 @@ bool MainMenuScene::init()
     addChild(rootNode);
 
 
+
+	
+
+
 	// Get tap to play 
 	tapTopPlay = (Sprite *)rootNode->getChildByName("spriteTapTopPlay");
 	
+	// Create a one by one touch event listener 
+	auto listener = EventListenerTouchOneByOne::create();
+	listener->onTouchBegan = CC_CALLBACK_2(MainMenuScene::onTouchBegan, this);
 
+	_eventDispatcher->addEventListenerWithSceneGraphPriority(listener, this);
 
 	this->scheduleUpdate();
 
@@ -62,4 +72,14 @@ void MainMenuScene::update(float delta) {
 	tapTopPlay->setOpacity(tapTopPlay->getOpacity() + tapOpacity);
 
 
+}
+
+bool MainMenuScene::onTouchBegan(Touch *touch, Event *unused_event) {
+	gotoLevelSelectionScene();
+	return true;
+}
+
+void MainMenuScene::gotoLevelSelectionScene() {
+	auto scene = LevelSelectionScene::createScene();
+	Director::getInstance()->replaceScene(TransitionMoveInR::create(TRANSITION_TIME_MOVE_IN_R, scene));
 }

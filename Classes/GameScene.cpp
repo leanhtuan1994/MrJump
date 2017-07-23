@@ -1,4 +1,5 @@
 #include "GameScene.h"
+#include "Definitions.h"
 #include "cocostudio/CocoStudio.h"
 #include "ui/CocosGUI.h"
 
@@ -33,16 +34,39 @@ bool GameScene::init()
         return false;
     }
 
-	auto map = TMXTiledMap::create("level1.tmx");
-	this->addChild(map);
+	/* Get size */
+	Size visibleSize = Director::getInstance()->getVisibleSize();
+	Vec2 origin = Director::getInstance()->getVisibleOrigin();
 
+	/*  Get level selected */
+	auto userdefault = UserDefault::getInstance();
+	this->currentLevelSelected = userdefault->getIntegerForKey("Level");
+
+	/* init level map */
+	this->level = new Level();
+	if (currentLevelSelected == LEVEL_NAME::LEVEL_1) {
+		level->loadMap("level1.tmx");
+		level->retain();
+	}
+	this->addChild(level->getMapLevel(), TAG_ZORDER::MAP);
+	
+
+	playerNode = CSLoader::createNode("Player.csb");
+	playerNode->setPosition(0, visibleSize.height / 2 + origin.y);
+
+
+	cocostudio::timeline::ActionTimeline *actionTimeline = CSLoader::createTimeline("Player.csb");
+	playerNode->runAction(actionTimeline);
+	actionTimeline->gotoFrameAndPlay(0, true);
+	this->addChild(playerNode, TAG_ZORDER::PLAYER);
 
 	
+	this->scheduleUpdate();
 
     return true;
 }
 
 
 void GameScene::update(float delta) {
-
+//	playerNode->setPositionX(playerNode->getPositionX() + 3);
 }
