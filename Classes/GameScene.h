@@ -2,7 +2,8 @@
 #define __GAME_SCENE_H__
 
 #include "cocos2d.h"
-#include "Level.h"
+#include "Level.h"	  
+#include "Player.h"
 
 class GameScene : public cocos2d::Layer
 {
@@ -25,7 +26,7 @@ private:
 	Level *level;
 	int currentLevelSelected;
 
-	cocos2d::Node *playerNode;
+	Player *player;
 
 };
 

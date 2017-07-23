@@ -51,14 +51,10 @@ bool GameScene::init()
 	this->addChild(level->getMapLevel(), TAG_ZORDER::MAP);
 	
 
-	playerNode = CSLoader::createNode("Player.csb");
-	playerNode->setPosition(0, visibleSize.height / 2 + origin.y);
+	player = Player::create();
+	this->addChild(player, TAG_ZORDER::PLAYER);
 
-
-	cocostudio::timeline::ActionTimeline *actionTimeline = CSLoader::createTimeline("Player.csb");
-	playerNode->runAction(actionTimeline);
-	actionTimeline->gotoFrameAndPlay(0, true);
-	this->addChild(playerNode, TAG_ZORDER::PLAYER);
+	player->setPosition(visibleSize.width / 2 + origin.x, visibleSize.height / 2 + origin.y);
 
 	
 	this->scheduleUpdate();
