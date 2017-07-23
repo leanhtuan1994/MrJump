@@ -12,6 +12,7 @@ Scene* GameScene::createScene()
     // 'scene' is an autorelease object
 	auto scene = Scene::createWithPhysics(); 
 	scene->getPhysicsWorld()->setDebugDrawMask(PhysicsWorld::DEBUGDRAW_ALL);
+	// scene->getPhysicsWorld()->setGravity(cocos2d::Vec2(0, -9));
 
     
     // 'layer' is an autorelease object
@@ -45,6 +46,7 @@ bool GameScene::init()
 	auto userdefault = UserDefault::getInstance();
 	this->currentLevelSelected = userdefault->getIntegerForKey("Level");
 
+
 	/* init level map */
 	this->level = new Level();
 	if (currentLevelSelected == LEVEL_NAME::LEVEL_1) {
@@ -53,13 +55,30 @@ bool GameScene::init()
 	}
 	this->addChild(level->getMapLevel(), TAG_ZORDER::MAP);
 
+	/* init box for world */ 
+	auto edgeBody = PhysicsBody::createEdgeBox(cocos2d::Size( visibleSize.width, 50), PHYSICSSHAPE_MATERIAL_DEFAULT, 3.0F);
+	edgeBody->setDynamic(false);
+	auto edgeNode = Node::create();
+	edgeNode->setPosition(Vec2(visibleSize.width / 2 + origin.x,  origin.y));
+	edgeNode->setPhysicsBody(edgeBody);
+	this->addChild(edgeNode);
 
-	player = MrJump::create();
-	Point playerPosition = player->getPositionTiled(level->getMapLevel());
-	player->setPosition(playerPosition.x, playerPosition.y);
-	this->addChild(player, TAG_ZORDER::PLAYER);
-	player->runAction(player->runing());
+
+
+
+	/* init player object */
+	mrJump = MrJump::create();
+	// get position in the map 
+	Point playerPosition = mrJump->getPositionTiled(level->getMapLevel());
+	mrJump->setPosition(playerPosition.x, playerPosition.y);
+
+	mrJump->getPhysicsBody()->setDynamic(true);
+	this->addChild(mrJump, TAG_ZORDER::PLAYER);
+
+	// run action 
+//	mrJump->runAction(mrJump->runing());
 	
+
 
 
 	
@@ -70,5 +89,5 @@ bool GameScene::init()
 
 
 void GameScene::update(float delta) {
-
+	mrJump->setPositionX(mrJump->getPositionX() + 3);
 }

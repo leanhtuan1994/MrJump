@@ -22,10 +22,11 @@ MrJump * MrJump::create() {
 	playerNode->runAction(actionTimeline);
 	actionTimeline->gotoFrameAndPlay(0, true);
 	*/
-	
 
 	auto player = (MrJump *)Sprite::create("Jump.png");
+	auto body = cocos2d::PhysicsBody::createBox(player->getContentSize(), cocos2d::PhysicsMaterial(0, 1, 0) );
 
+	player->setPhysicsBody(body);
 	return player;
 }
 

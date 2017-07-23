@@ -31,7 +31,7 @@ private:
 	Level *level;
 	int currentLevelSelected;
 
-	MrJump *player;
+	MrJump *mrJump;
 
 	cocos2d::Size visibleSize;
 	cocos2d::Vec2 origin;
