@@ -301,3 +301,5 @@ $RECYCLE.BIN/
 
 # Windows shortcuts
 *.lnk
+proj.win32/Debug.win32/zlib1.dll
+proj.win32/Debug.win32/CloseNormal.png
