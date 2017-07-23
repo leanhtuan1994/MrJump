@@ -15,16 +15,10 @@ MrJump::~MrJump() {
 
 
 MrJump * MrJump::create() {
-	/* 
-	Player* playerNode = (Player *)CSLoader::createNode("Player.csb");
-	
-	cocostudio::timeline::ActionTimeline *actionTimeline = CSLoader::createTimeline("Player.csb");
-	playerNode->runAction(actionTimeline);
-	actionTimeline->gotoFrameAndPlay(0, true);
-	*/
 
-	auto player = (MrJump *)Sprite::create("Jump.png");
-	auto body = cocos2d::PhysicsBody::createBox(player->getContentSize(), cocos2d::PhysicsMaterial(0, 1, 0) );
+	auto player = (MrJump *)Sprite::createWithSpriteFrameName("Jump1.png");
+	auto body = cocos2d::PhysicsBody::createBox(cocos2d::Size(player->getContentSize().width - 5, player->getContentSize().height - 18), 
+		cocos2d::PhysicsMaterial(0, 1, 0));
 
 	player->setPhysicsBody(body);
 	return player;

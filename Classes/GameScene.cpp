@@ -72,7 +72,7 @@ bool GameScene::init()
 
 	mrJump->getPhysicsBody()->setDynamic(true);
 	this->addChild(mrJump, TAG_ZORDER::PLAYER);
-	//	mrJump->runAction(mrJump->runing());
+	mrJump->runAction(mrJump->runing());
 
 	/* init camera */
 	cameraTarget = cocos2d::Sprite::create();
@@ -91,7 +91,7 @@ bool GameScene::init()
 
 
 void GameScene::update(float delta) {
-	mrJump->setPositionX(mrJump->getPositionX() + 3);
+	mrJump->setPositionX(mrJump->getPositionX() + 4);
 
 	// Update position camera and edgeNode follow mrJump
 	cameraTarget->setPositionX(visibleSize.width / 2  + origin.x > mrJump->getPositionX() ? visibleSize.width/2 + origin.x : mrJump->getPositionX());
