@@ -15,23 +15,33 @@ MrJump::~MrJump() {
 
 
 MrJump * MrJump::create() {
-
+	/* create sprite */
 	auto player = (MrJump *)Sprite::createWithSpriteFrameName("Jump1.png");
-	auto body = cocos2d::PhysicsBody::createBox(cocos2d::Size(player->getContentSize().width - 5, player->getContentSize().height - 18), 
-		cocos2d::PhysicsMaterial(0, 1, 0));
 
+	/* init physics body */
+	auto body = cocos2d::PhysicsBody::createBox(cocos2d::Size(player->getContentSize().width - 5, player->getContentSize().height - 18), 
+		cocos2d::PhysicsMaterial(0.0f, 0.0f, 0.0f));
+
+
+	/* set physics body for sprite */
 	player->setPhysicsBody(body);
+
+
 	return player;
 }
 
 cocos2d::Point MrJump::getPositionTiled(cocos2d::TMXTiledMap *tileMap) {
 	Point playerPosition;
+	
+	/* get player object in level tiled map */
 	TMXObjectGroup *playerObjects = tileMap->getObjectGroup("playerObjects");
 	auto playerOb = playerObjects->getObject("player");
+
 	if (!playerOb.empty()) {		
 		playerPosition.x = playerOb["x"].asInt();
 		playerPosition.y = playerOb["y"].asInt();
 	}
+
 	return playerPosition;
 }
 

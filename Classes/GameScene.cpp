@@ -1,4 +1,4 @@
-#include "GameScene.h"
+﻿#include "GameScene.h"
 #include "Definitions.h"
 #include "cocostudio/CocoStudio.h"
 #include "ui/CocosGUI.h"
@@ -12,7 +12,9 @@ Scene* GameScene::createScene()
     // 'scene' is an autorelease object
 	auto scene = Scene::createWithPhysics(); 
 	scene->getPhysicsWorld()->setDebugDrawMask(PhysicsWorld::DEBUGDRAW_ALL);
-	// scene->getPhysicsWorld()->setGravity(cocos2d::Vec2(0, -9));
+
+	/* set gravity for physics world */
+	//scene->getPhysicsWorld()->setGravity(cocos2d::Vec2(0.0f, -10.0f));
 
     
     // 'layer' is an autorelease object
@@ -84,6 +86,9 @@ bool GameScene::init()
 	camera->retain();
 	this->runAction(camera);
 	
+	mrJump->getPhysicsBody()->applyForce(cocos2d::Vec2(100.0f, 0.0f));
+	mrJump->getPhysicsBody()->setVelocityLimit(300.0f);
+
 	this->scheduleUpdate();
 
     return true;
@@ -91,7 +96,9 @@ bool GameScene::init()
 
 
 void GameScene::update(float delta) {
-	mrJump->setPositionX(mrJump->getPositionX() + 4);
+//	mrJump->setPositionX(mrJump->getPositionX() + 4);
+
+	//mrJump->getPhysicsBody()->setMoment(mrJump->getPhysicsBody()->getMoment() + 0.1f);
 
 	// Update position camera and edgeNode follow mrJump
 	cameraTarget->setPositionX(visibleSize.width / 2  + origin.x > mrJump->getPositionX() ? visibleSize.width/2 + origin.x : mrJump->getPositionX());
