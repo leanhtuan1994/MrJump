@@ -89,6 +89,28 @@ bool GameScene::init()
 	mrJump->getPhysicsBody()->applyForce(cocos2d::Vec2(100.0f, 0.0f));
 	mrJump->getPhysicsBody()->setVelocityLimit(300.0f);
 
+
+
+	/* get player object in level tiled map */
+	TMXObjectGroup *groundGroup = level->getMapLevel()->getObjectGroup("groundObjects");
+	auto grounds = groundGroup->getObjects();
+	for (int i = 0; i < grounds.size(); i++) {
+		auto groudNode = cocos2d::Node::create();
+		groudNode->setAnchorPoint(cocos2d::Vec2(0.0f, 0.0f));
+		groudNode->setContentSize(cocos2d::Size(grounds[i].asValueMap()["width"].asInt(), grounds[i].asValueMap()["height"].asInt()));
+		groudNode->setPosition(cocos2d::Vec2(grounds[i].asValueMap()["x"].asInt(), grounds[i].asValueMap()["y"].asInt()));
+
+
+		auto groudBody = cocos2d::PhysicsBody::createEdgeBox(groudNode->getContentSize(), PHYSICSBODY_MATERIAL_DEFAULT);
+
+		groudBody->setDynamic(false);
+
+		groudNode->setPhysicsBody(groudBody);
+
+
+		this->addChild(groudNode);
+	}
+
 	this->scheduleUpdate();
 
     return true;
