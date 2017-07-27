@@ -20,7 +20,10 @@ MrJump * MrJump::create() {
 
 	/* init physics body */
 	auto body = cocos2d::PhysicsBody::createBox(cocos2d::Size(player->getContentSize().width - 5, player->getContentSize().height - 18), 
-		cocos2d::PhysicsMaterial(0.0f, 0.0f, 0.0f));
+		cocos2d::PhysicsMaterial(1.0f, 0.0f, 0.0f));
+	
+	/* Set mrjump standing always */
+	body->setLinearDamping(1.0f);
 
 
 	/* set physics body for sprite */

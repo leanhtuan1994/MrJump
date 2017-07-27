@@ -4,6 +4,7 @@
 #include "cocos2d.h"
 #include "Level.h"	  
 #include "MrJump.h"
+#include "Ground.h"
 
 class GameScene : public cocos2d::Layer
 {
@@ -28,10 +29,13 @@ private:
 		this->sceneWorld = newWorld;
 	}
 
-	Level *level;
 	int currentLevelSelected;
 
+	/* Objects in game */
+	Level *level;
 	MrJump *mrJump;
+	Ground *ground;
+
 
 	cocos2d::Node *edgeNode;
 	cocos2d::Size visibleSize;
