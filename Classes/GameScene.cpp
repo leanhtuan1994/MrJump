@@ -14,7 +14,7 @@ Scene* GameScene::createScene()
 	scene->getPhysicsWorld()->setDebugDrawMask(PhysicsWorld::DEBUGDRAW_ALL);
 
 	/* set gravity for physics world */
-	//scene->getPhysicsWorld()->setGravity(cocos2d::Vec2(0.0f, -10.0f));
+	scene->getPhysicsWorld()->setGravity(cocos2d::Vec2(0.0f, -300.0f));
 
     
     // 'layer' is an autorelease object
@@ -35,8 +35,7 @@ bool GameScene::init()
     
     //////////////////////////////
     // 1. super init first
-    if ( !Layer::init() )
-    {
+    if ( !Layer::init() ) {
         return false;
     }
 
@@ -86,12 +85,20 @@ bool GameScene::init()
 	camera->retain();
 	this->runAction(camera);
 
-
-
 	/* Init Ground */
 	ground = new Ground();
 	ground->getGroundDataInLevel(level->getMapLevel());
 	ground->addGroundInScene(this);
+
+
+	auto touchListener = cocos2d::EventListenerTouchOneByOne::create();
+	touchListener->setSwallowTouches(true);
+	touchListener->onTouchBegan = CC_CALLBACK_2(GameScene::onTouchBegan, this);
+	touchListener->onTouchEnded = CC_CALLBACK_2(GameScene::onTouchEnded, this);
+
+	cocos2d::Director::getInstance()->getEventDispatcher()->addEventListenerWithSceneGraphPriority(touchListener, this);
+
+
 
 	this->scheduleUpdate();
 
@@ -100,10 +107,36 @@ bool GameScene::init()
 
 
 void GameScene::update(float delta) {
-	/* move mr jump */
-	mrJump->setPositionX(mrJump->getPositionX() + 5.5f);
+	//mrJump->setPositionX(mrJump->getPositionX() + 5.0f);
 
 	// Update position camera and edgeNode follow mrJump
 	cameraTarget->setPositionX(visibleSize.width / 2  + origin.x > mrJump->getPositionX() ? visibleSize.width/2 + origin.x : mrJump->getPositionX());
 	edgeNode->setPositionX( cameraTarget->getPositionX());
 }
+
+
+bool GameScene::onTouchBegan(cocos2d::Touch *touch, cocos2d::Event *unused_event) {
+	CCLOG("Touch Began!");
+	//mrJump->getPhysicsBody()->applyImpulse(cocos2d::Vec2(5.0f, 300.0f));
+
+	return true;
+}
+
+void GameScene::onTouchEnded(cocos2d::Touch *touch, cocos2d::Event *unused_event) {
+
+	CCLOG("Touch Ended !");
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+

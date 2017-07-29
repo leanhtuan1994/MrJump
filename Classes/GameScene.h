@@ -22,6 +22,9 @@ public:
 	void update(float delta);
 
 
+	bool onTouchBegan(cocos2d::Touch *touch, cocos2d::Event *unused_event);
+	void onTouchEnded(cocos2d::Touch *touch, cocos2d::Event *unused_event);
+
 private:
 
 	cocos2d::PhysicsWorld*	sceneWorld;

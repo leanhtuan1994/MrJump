@@ -15,9 +15,6 @@ public:
 	cocos2d::Point getPositionTiled( cocos2d::TMXTiledMap *tileMap);
 
 	cocos2d::RepeatForever *runing();
-
-
-
 };
 
 #endif // __PLAYER_H__

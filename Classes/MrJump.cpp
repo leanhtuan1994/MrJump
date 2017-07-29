@@ -19,16 +19,14 @@ MrJump * MrJump::create() {
 	auto player = (MrJump *)Sprite::createWithSpriteFrameName("Jump1.png");
 
 	/* init physics body */
-	auto body = cocos2d::PhysicsBody::createBox(cocos2d::Size(player->getContentSize().width - 5, player->getContentSize().height - 18), 
-		cocos2d::PhysicsMaterial(1.0f, 0.0f, 0.0f));
+	auto body = cocos2d::PhysicsBody::createBox(cocos2d::Size(player->getContentSize().width - 5, player->getContentSize().height - 14), 
+		cocos2d::PhysicsMaterial(0.0f, 0.0f, 0.1f));
 	
-	/* Set mrjump standing always */
-	body->setLinearDamping(1.0f);
+	body->setRotationEnable(false);
 
 
 	/* set physics body for sprite */
 	player->setPhysicsBody(body);
-
 
 	return player;
 }
