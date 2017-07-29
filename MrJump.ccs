@@ -18,9 +18,18 @@
           <Image Name="Asset 8.png" />
           <Image Name="Asset 9.png" />
           <Image Name="black_opacity.png" />
+          <Image Name="ButtonLevelNormal.png" />
+          <Image Name="ButtonLevelSelected.png" />
+          <Image Name="ButtonSoundNormal.png" />
+          <Image Name="ButtonSoundSelected.png" />
           <Image Name="chan 1.png" />
           <Image Name="chan 2.png" />
+          <Image Name="CloseButtonNormal.png" />
+          <Image Name="CloseButtonSelected.png" />
           <Image Name="dau.png" />
+          <File Name="Game Button.psd" />
+          <Image Name="InfoButtonNormal.png" />
+          <Image Name="InfoButtonSelected.png" />
           <Image Name="Jump.png" />
           <Image Name="key.png" />
           <Image Name="level1_name.png" />
@@ -31,19 +40,22 @@
           <Image Name="Lock.png" />
           <Image Name="MrJump Icon.png" />
           <Image Name="quan.png" />
+          <Image Name="RateButtonNormal.png" />
+          <Image Name="RateButtonSelected.png" />
           <Image Name="settingnormalicon.png" />
           <Image Name="settingselectedicon.png" />
+          <Image Name="SoundBackgroundButtonNormal.png" />
+          <Image Name="SoundBackgroundButtonSelected.png" />
           <Image Name="TapToPlay.png" />
           <Image Name="tay 1.png" />
           <Image Name="tay 2.png" />
           <Image Name="than.png" />
-          <Image Name="WorldButtonNormal.png" />
-          <Image Name="WorldButtonSelected.png" />
         </Folder>
         <Project Name="GameScene.csd" Type="Scene" />
         <Project Name="LevelSelectionScene.csd" Type="Scene" />
         <Project Name="MainMenuScene.csd" Type="Scene" />
         <Project Name="Player.csd" Type="Skeleton" />
+        <Project Name="SettingScene.csd" Type="Scene" />
       </RootFolder>
     </Group>
   </SolutionFolder>

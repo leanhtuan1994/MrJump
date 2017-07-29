@@ -58,7 +58,6 @@ bool AppDelegate::applicationDidFinishLaunching() {
 
 
 	SpriteFrameCache::getInstance()->addSpriteFramesWithFile("JumpAni.plist", "JumpAni.png");
-	//SpriteFrameCache::getInstance()->addSpriteFramesWithFile("Ninja.plist", "Ninja.png");
 
     // run
     director->runWithScene(scene);

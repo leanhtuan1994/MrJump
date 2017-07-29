@@ -13,7 +13,14 @@ LOCAL_MODULE_FILENAME := libcocos2dcpp
 
 LOCAL_SRC_FILES := hellocpp/main.cpp \
 ../../../Classes/AppDelegate.cpp \
-../../../Classes/HelloWorldScene.cpp
+../../../Classes/GameScene.cpp \
+../../../Classes/Ground.cpp \
+../../../Classes/Level.cpp \
+../../../Classes/LevelSelectionScene.cpp \
+../../../Classes/MainMenuScene.cpp \
+../../../Classes/MrJump.cpp \
+../../../Classes/SplashScene.cpp
+
 
 LOCAL_CPPFLAGS := -DSDKBOX_ENABLED
 LOCAL_LDLIBS := -landroid \

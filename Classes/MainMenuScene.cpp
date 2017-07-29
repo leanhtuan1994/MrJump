@@ -1,8 +1,9 @@
 #include "MainMenuScene.h"
 #include "LevelSelectionScene.h"
 #include "Definitions.h"
+#include "SettingScene.h"
+
 #include "cocostudio/CocoStudio.h"
-#include "ui/CocosGUI.h"
 
 USING_NS_CC;
 
@@ -37,6 +38,7 @@ bool MainMenuScene::init()
     
     auto rootNode = CSLoader::createNode("MainMenuScene.csb");
 
+	
 	// Run animation
 	cocostudio::timeline::ActionTimeline *actionTimeline = CSLoader::createTimeline("MainMenuScene.csb");
 	rootNode->runAction(actionTimeline);
@@ -45,13 +47,19 @@ bool MainMenuScene::init()
     addChild(rootNode);
 
 
-
-	
-
+	/* Button Setting listener */
+	btnSetting = (cocos2d::ui::Button *) rootNode->getChildByName("btnSetting");
+	btnSetting->addTouchEventListener([](cocos2d::Ref *sender, cocos2d::ui::Widget::TouchEventType type) {
+		switch (type) {
+		case cocos2d::ui::Widget::TouchEventType::ENDED:
+			auto scene = SettingScene::createScene();
+			Director::getInstance()->replaceScene(TransitionMoveInL::create(TRANSITION_TIME, scene));
+			break;
+		}
+	});
 
 	// Get tap to play 
 	tapTopPlay = (Sprite *)rootNode->getChildByName("spriteTapTopPlay");
-	
 	// Create a one by one touch event listener 
 	auto listener = EventListenerTouchOneByOne::create();
 	listener->onTouchBegan = CC_CALLBACK_2(MainMenuScene::onTouchBegan, this);

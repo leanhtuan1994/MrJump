@@ -161,13 +161,13 @@
             <FileData Type="Normal" Path="assets/Asset 2.png" Plist="" />
             <BlendFunc Src="1" Dst="771" />
           </AbstractNodeData>
-          <AbstractNodeData Name="mrJump" ActionTag="-1238253226" Tag="18" IconVisible="False" PositionPercentXEnabled="True" PositionPercentYEnabled="True" LeftMargin="271.0001" RightMargin="271.0000" TopMargin="205.3430" BottomMargin="309.6570" ctype="SpriteObjectData">
+          <AbstractNodeData Name="mrJump" ActionTag="-1238253226" Tag="18" IconVisible="False" PositionPercentXEnabled="True" PositionPercentYEnabled="True" LeftMargin="271.0000" RightMargin="271.0000" TopMargin="182.5000" BottomMargin="332.5000" ctype="SpriteObjectData">
             <Size X="792.0000" Y="235.0000" />
             <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
-            <Position X="667.0001" Y="427.1570" />
+            <Position X="667.0000" Y="450.0000" />
             <Scale ScaleX="1.0000" ScaleY="1.0000" />
             <CColor A="255" R="255" G="255" B="255" />
-            <PrePosition X="0.5000" Y="0.5695" />
+            <PrePosition X="0.5000" Y="0.6000" />
             <PreSize X="0.5937" Y="0.3133" />
             <FileData Type="Normal" Path="assets/MrJump Icon.png" Plist="" />
             <BlendFunc Src="1" Dst="771" />
@@ -183,7 +183,7 @@
             <FileData Type="Normal" Path="assets/TapToPlay.png" Plist="" />
             <BlendFunc Src="1" Dst="771" />
           </AbstractNodeData>
-          <AbstractNodeData Name="Button_1" ActionTag="-39574258" Tag="18" IconVisible="False" HorizontalEdge="LeftEdge" VerticalEdge="TopEdge" LeftMargin="30.7000" RightMargin="1231.3000" TopMargin="20.5001" BottomMargin="650.4999" TouchEnable="True" FontSize="14" Scale9Enable="True" LeftEage="15" RightEage="15" TopEage="11" BottomEage="11" Scale9OriginX="15" Scale9OriginY="11" Scale9Width="42" Scale9Height="57" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="ButtonObjectData">
+          <AbstractNodeData Name="btnSetting" ActionTag="-39574258" Tag="18" IconVisible="False" HorizontalEdge="LeftEdge" VerticalEdge="TopEdge" LeftMargin="30.7000" RightMargin="1231.3000" TopMargin="20.5001" BottomMargin="650.4999" TouchEnable="True" FontSize="14" Scale9Enable="True" LeftEage="15" RightEage="15" TopEage="11" BottomEage="11" Scale9OriginX="15" Scale9OriginY="11" Scale9Width="42" Scale9Height="57" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="ButtonObjectData">
             <Size X="72.0000" Y="79.0000" />
             <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
             <Position X="66.7000" Y="689.9999" />
@@ -195,21 +195,6 @@
             <DisabledFileData Type="Default" Path="Default/Button_Disable.png" Plist="" />
             <PressedFileData Type="Normal" Path="assets/settingselectedicon.png" Plist="" />
             <NormalFileData Type="Normal" Path="assets/settingnormalicon.png" Plist="" />
-            <OutlineColor A="255" R="255" G="0" B="0" />
-            <ShadowColor A="255" R="110" G="110" B="110" />
-          </AbstractNodeData>
-          <AbstractNodeData Name="WorldAButton" ActionTag="1786120667" Tag="22" IconVisible="False" PositionPercentXEnabled="True" VerticalEdge="BottomEdge" LeftMargin="618.5000" RightMargin="618.5000" TopMargin="598.0500" BottomMargin="25.9500" TouchEnable="True" FontSize="14" Scale9Enable="True" LeftEage="15" RightEage="15" TopEage="11" BottomEage="11" Scale9OriginX="15" Scale9OriginY="11" Scale9Width="67" Scale9Height="104" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="ButtonObjectData">
-            <Size X="97.0000" Y="126.0000" />
-            <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
-            <Position X="667.0000" Y="88.9500" />
-            <Scale ScaleX="1.0000" ScaleY="1.0000" />
-            <CColor A="255" R="255" G="255" B="255" />
-            <PrePosition X="0.5000" Y="0.1186" />
-            <PreSize X="0.0727" Y="0.1680" />
-            <TextColor A="255" R="65" G="65" B="70" />
-            <DisabledFileData Type="Default" Path="Default/Button_Disable.png" Plist="" />
-            <PressedFileData Type="Normal" Path="assets/WorldButtonSelected.png" Plist="" />
-            <NormalFileData Type="Normal" Path="assets/WorldButtonNormal.png" Plist="" />
             <OutlineColor A="255" R="255" G="0" B="0" />
             <ShadowColor A="255" R="110" G="110" B="110" />
           </AbstractNodeData>
@@ -278,6 +263,21 @@
             <PreSize X="0.1537" Y="0.1213" />
             <FileData Type="Normal" Path="assets/Asset 5.png" Plist="" />
             <BlendFunc Src="1" Dst="771" />
+          </AbstractNodeData>
+          <AbstractNodeData Name="Button_3" ActionTag="-1968773462" Tag="68" IconVisible="False" PositionPercentXEnabled="True" PositionPercentYEnabled="True" LeftMargin="619.0000" RightMargin="619.0000" TopMargin="593.5000" BottomMargin="23.5000" TouchEnable="True" FontSize="14" Scale9Enable="True" LeftEage="15" RightEage="15" TopEage="11" BottomEage="11" Scale9OriginX="15" Scale9OriginY="11" Scale9Width="66" Scale9Height="111" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="ButtonObjectData">
+            <Size X="96.0000" Y="133.0000" />
+            <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
+            <Position X="667.0000" Y="90.0000" />
+            <Scale ScaleX="1.0000" ScaleY="1.0000" />
+            <CColor A="255" R="255" G="255" B="255" />
+            <PrePosition X="0.5000" Y="0.1200" />
+            <PreSize X="0.0720" Y="0.1773" />
+            <TextColor A="255" R="65" G="65" B="70" />
+            <DisabledFileData Type="Default" Path="Default/Button_Disable.png" Plist="" />
+            <PressedFileData Type="Normal" Path="assets/ButtonLevelSelected.png" Plist="" />
+            <NormalFileData Type="Normal" Path="assets/ButtonLevelNormal.png" Plist="" />
+            <OutlineColor A="255" R="255" G="0" B="0" />
+            <ShadowColor A="255" R="110" G="110" B="110" />
           </AbstractNodeData>
         </Children>
       </ObjectData>
