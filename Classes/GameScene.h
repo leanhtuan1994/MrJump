@@ -4,7 +4,10 @@
 #include "cocos2d.h"
 #include "Level.h"	  
 #include "MrJump.h"
-#include "Ground.h"
+#include "Ground.h"	 
+#include "Sea.h"
+
+
 
 class GameScene : public cocos2d::Layer
 {
@@ -18,12 +21,17 @@ public:
     // implement the "static create()" method manually
 	CREATE_FUNC(GameScene);
 
-
 	void update(float delta);
 
 
 	bool onTouchBegan(cocos2d::Touch *touch, cocos2d::Event *unused_event);
+	void onTouchMoved(cocos2d::Touch *touch, cocos2d::Event *unused_event);
 	void onTouchEnded(cocos2d::Touch *touch, cocos2d::Event *unused_event);
+
+	bool onContactBegin(cocos2d::PhysicsContact &contact);
+
+
+	void gotoGameOverScene(float dt = 0.0f);
 
 private:
 
@@ -32,12 +40,15 @@ private:
 		this->sceneWorld = newWorld;
 	}
 
+	void stopJump(float dt);
+
 	int currentLevelSelected;
 
 	/* Objects in game */
-	Level *level;
-	MrJump *mrJump;
-	Ground *ground;
+	Level	*level;
+	MrJump	*mrJump;
+	Ground	*ground;
+	Sea		*sea;
 
 
 	cocos2d::Node *edgeNode;
@@ -47,6 +58,17 @@ private:
 	// create camera 
 	cocos2d::Follow *camera;
 	cocos2d::Sprite *cameraTarget;
+
+
+	float limitedCameraPositionX;
+	float spaceCameraPositionX;
+
+	// get time when touch began 
+	long long timeTouchBegan;
+	
+	// check time over to stop jumpping 
+	bool isTouchTimeForJump;
+
 };
 
 #endif // __GAME_SCENE_H__

@@ -8,7 +8,7 @@ Ground::Ground() {
 }
 
 Ground::~Ground() {
-	
+
 }
 
 
@@ -16,17 +16,25 @@ void Ground::getGroundDataInLevel(cocos2d::TMXTiledMap *map) {
 	/* get player object in level tiled map */
 	TMXObjectGroup *groundGroup = map->getObjectGroup("groundObjects");
 	auto grounds = groundGroup->getObjects();
-	for (int i = 0; i < grounds.size(); i++) {
+	int sizeGrounds = grounds.size();
+
+	/* get objects and set physics body for it */
+	for (int i = 0; i < sizeGrounds; i++) {
+		// Create Node Object 
 		auto groudNode = cocos2d::Node::create();
 		groudNode->setAnchorPoint(cocos2d::Vec2(0.0f, 0.0f));
 		groudNode->setContentSize(cocos2d::Size(grounds[i].asValueMap()["width"].asInt(), grounds[i].asValueMap()["height"].asInt()));
 		groudNode->setPosition(cocos2d::Vec2(grounds[i].asValueMap()["x"].asInt(), grounds[i].asValueMap()["y"].asInt()));
 
+		// Create Physics body 
 		auto groudBody = cocos2d::PhysicsBody::createBox(groudNode->getContentSize(), PHYSICSBODY_MATERIAL_DEFAULT);
-
+		groudBody->setCollisionBitmask(GROUND_COLLISION_BITMASK);
+		groudBody->setContactTestBitmask(true);
 		groudBody->setDynamic(false);
-		groudNode->setPhysicsBody(groudBody);
 
+		// Added physics body to node and add to list node 
+		groudNode->setPhysicsBody(groudBody);
+		groudNode->retain();
 		listGrounds.push_back(groudNode);
 	}
 }

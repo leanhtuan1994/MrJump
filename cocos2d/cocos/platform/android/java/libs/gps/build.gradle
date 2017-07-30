@@ -5,27 +5,26 @@ repositories {
 }
 
 dependencies {
-    compile fileTree(dir: 'libs', include: ['*.jar'])
+    compile fileTree(include: ['*.jar'], dir: 'libs')
 }
 
 android {
-    compileSdkVersion 22
+    compileSdkVersion 19
     buildToolsVersion '25.0.0'
-
     defaultConfig {
-        minSdkVersion 10
+        minSdkVersion 19
         targetSdkVersion 22
     }
-
     lintOptions {
         abortOnError false
     }
-
     sourceSets {
         main {
             manifest.srcFile 'AndroidManifest.xml'
             java.srcDirs = ['src']
             res.srcDirs = ['res']
         }
+    }
+    productFlavors {
     }
 }

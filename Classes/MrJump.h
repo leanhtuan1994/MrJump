@@ -3,6 +3,14 @@
 
 #include "cocos2d.h"
 
+
+enum STATE {
+	RUN,
+	JUMP,
+	DEAD
+};
+
+
 class MrJump : public cocos2d::Sprite
 {
 public:
@@ -14,7 +22,31 @@ public:
 
 	cocos2d::Point getPositionTiled( cocos2d::TMXTiledMap *tileMap);
 
-	cocos2d::RepeatForever *runing();
+	cocos2d::RepeatForever *runningForever();
+
+
+	void jump() {
+		if (isGrounded) {
+			state = STATE::JUMP;
+			isGrounded = false;
+		}
+	}
+
+	void stopJump() {
+		state = STATE::RUN;
+	}
+
+
+	bool isGrounded;
+
+	void setActionOfState();
+
+	/* attributes of mr jump */
+	STATE state;
+
+	cocos2d::Size visibleSize = cocos2d::Director::getInstance()->getVisibleSize();
+	cocos2d::Vec2 origin = cocos2d::Director::getInstance()->getVisibleOrigin();
+
 };
 
 #endif // __PLAYER_H__

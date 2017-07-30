@@ -78,8 +78,6 @@ void MainMenuScene::update(float delta) {
 	if (tapTopPlay->getOpacity() <= 0) tapOpacity = 1;
 	else if (tapTopPlay->getOpacity() >= 255) tapOpacity = -1;
 	tapTopPlay->setOpacity(tapTopPlay->getOpacity() + tapOpacity);
-
-
 }
 
 bool MainMenuScene::onTouchBegan(Touch *touch, Event *unused_event) {

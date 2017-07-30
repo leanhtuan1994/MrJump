@@ -18,13 +18,19 @@ MrJump * MrJump::create() {
 	/* create sprite */
 	auto player = (MrJump *)Sprite::createWithSpriteFrameName("Jump1.png");
 
+	player->isGrounded = true;
+
 	/* init physics body */
 	auto body = cocos2d::PhysicsBody::createBox(cocos2d::Size(player->getContentSize().width - 5, player->getContentSize().height - 14), 
-		cocos2d::PhysicsMaterial(0.0f, 0.0f, 0.1f));
+		cocos2d::PhysicsMaterial(1.0f, 0.0f, 0.0f));
 	
 	body->setRotationEnable(false);
+	body->setLinearDamping(1.0f);
 
-
+	/* set collision bitmask */
+	body->setCollisionBitmask(MRJUMP_COLLISION_BITMASK);
+	body->setContactTestBitmask(true);
+														 
 	/* set physics body for sprite */
 	player->setPhysicsBody(body);
 
@@ -47,7 +53,7 @@ cocos2d::Point MrJump::getPositionTiled(cocos2d::TMXTiledMap *tileMap) {
 }
 
 
-cocos2d::RepeatForever* MrJump::runing() {
+cocos2d::RepeatForever* MrJump::runningForever() {
 	int numFrame = NUM_FRAME_ANIMATION_JUMP;
 
 	cocos2d::Vector<cocos2d::SpriteFrame *> frames;
@@ -65,5 +71,25 @@ cocos2d::RepeatForever* MrJump::runing() {
 	cocos2d::Animate *animate = cocos2d::Animate::create(animation);
 	cocos2d::RepeatForever *repeat = cocos2d::RepeatForever::create(animate);
 
+	repeat->retain();
 	return repeat;
+}
+
+
+void MrJump::setActionOfState() {
+	this->setPositionX(this->getPositionX() + 5.5f);
+
+	switch (state) {
+	case RUN:
+		break;
+
+	case JUMP:
+		this->setPositionY(this->getPositionY() + 9.0f);
+
+		break;
+
+	case DEAD:
+
+		break;
+	}
 }
