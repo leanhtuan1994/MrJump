@@ -62,7 +62,9 @@ bool GameScene::init(){
 
 	/* init box for world */ 
 	int bodyHeight = level->getMapLevel()->getMapSize().width * level->getMapLevel()->getTileSize().width;
-	auto edgeBody = PhysicsBody::createEdgeBox(cocos2d::Size( visibleSize.width+ origin.x, visibleSize.height + origin.y), PHYSICSSHAPE_MATERIAL_DEFAULT, 1.0F);
+	auto edgeBody = PhysicsBody::createEdgeBox(cocos2d::Size( visibleSize.width+ origin.x, visibleSize.height + origin.y), 
+		PHYSICSSHAPE_MATERIAL_DEFAULT, 5.0F);
+
 	edgeBody->setDynamic(false);
 	edgeNode = Node::create();
 	edgeNode->setPosition( visibleSize.width /2 + origin.x , visibleSize.height/2 + origin.y);
@@ -78,7 +80,7 @@ bool GameScene::init(){
 
 	mrJump->getPhysicsBody()->setDynamic(true);
 	this->addChild(mrJump, TAG_ZORDER::PLAYER);
-	mrJump->runAction(mrJump->runningForever());
+	mrJump->runningAction();
   
 
 	/* init camera */
@@ -106,7 +108,7 @@ bool GameScene::init(){
 	
 
 	/* listener touch event */
-	auto touchListener = cocos2d::EventListenerTouchOneByOne::create();
+	touchListener = cocos2d::EventListenerTouchOneByOne::create();
 	touchListener->setSwallowTouches(true);
 	touchListener->onTouchBegan = CC_CALLBACK_2(GameScene::onTouchBegan, this);
 	touchListener->onTouchMoved = CC_CALLBACK_2(GameScene::onTouchMoved, this);
@@ -115,9 +117,13 @@ bool GameScene::init(){
 
 
 	/* listener physics contact */
-	auto contactListener = cocos2d::EventListenerPhysicsContact::create();
+	contactListener = cocos2d::EventListenerPhysicsContact::create();
 	contactListener->onContactBegin = CC_CALLBACK_1(GameScene::onContactBegin, this);
+	contactListener->onContactSeparate = CC_CALLBACK_1(GameScene::onContactSeparate, this);
 	this->getEventDispatcher()->addEventListenerWithSceneGraphPriority(contactListener, this);
+
+
+	CCLOG("SIZE: %f", level->getWidth());
 
 
 	this->scheduleUpdate();
@@ -190,25 +196,47 @@ bool GameScene::onContactBegin(cocos2d::PhysicsContact &contact) {
 		CCLOG(" MRJUMP + GROUND -> COLLISION ");
 	}
 
-
 	// Check if mr jump have collision with ground 
 	if ((bodyA->getCollisionBitmask() == MRJUMP_COLLISION_BITMASK && bodyB->getCollisionBitmask() == ENEMY_COLLISION_BITMASK) ||
 		(bodyA->getCollisionBitmask() == ENEMY_COLLISION_BITMASK && bodyB->getCollisionBitmask() == MRJUMP_COLLISION_BITMASK)) {
 
 		CCLOG(" MRJUMP + ENEMY -> COLLISION -- DIE");
-		gotoGameOverScene();
-	}
+		this->mrJump->die();
+		mrJump->stopRunningAction();
+		this->sceneWorld->removeAllBodies();
+		this->getEventDispatcher()->removeEventListener(touchListener);
+		this->getEventDispatcher()->removeEventListener(contactListener);
 
+		this->addGameOverLayer();
+	}
 
 	return true;
 }
 
 
-void GameScene::gotoGameOverScene(float dt) {
-	auto gameOverScene = GameOverScene::createScene();
-	Director::getInstance()->replaceScene(TransitionFade::create(TRANSITION_TIME_GAME_OVER, gameOverScene));
+void GameScene::onContactSeparate(cocos2d::PhysicsContact &contact) {
+	/* get physics contact */
+	PhysicsBody *bodyA = contact.getShapeA()->getBody();
+	PhysicsBody *bodyB = contact.getShapeB()->getBody();
+
+	// Check if mr jump have collision with ground 
+	if ((bodyA->getCollisionBitmask() == MRJUMP_COLLISION_BITMASK && bodyB->getCollisionBitmask() == GROUND_COLLISION_BITMASK) ||
+		(bodyA->getCollisionBitmask() == GROUND_COLLISION_BITMASK && bodyB->getCollisionBitmask() == MRJUMP_COLLISION_BITMASK)) {
+
+		mrJump->isGrounded = false;
+		CCLOG("onContactSeparate");
+	}
 }
 
+
+
+void GameScene::addGameOverLayer() {
+	auto gameOverLayer = GameOverScene::create();
+	gameOverLayer->setPosition( cameraTarget->getPositionX() - visibleSize.width/2 - origin.x, 
+		cameraTarget->getPositionY() - visibleSize.height/2 - origin.y);
+
+	this->addChild(gameOverLayer, GAMEOVERLAYER);
+}
 
 
 

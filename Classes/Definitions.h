@@ -8,7 +8,7 @@
 
 #define DISPLAY_TIME_SPLASH_SCENE		0.2f
 
-#define TIME_TOUCH_JUMP					300
+#define TIME_TOUCH_JUMP					250
 
 
 #define NUM_FRAME_ANIMATION_JUMP		16
@@ -32,7 +32,8 @@ enum LEVEL_NAME {
 enum TAG_ZORDER {
 	UI, 
 	MAP,
-	PLAYER
+	PLAYER,
+	GAMEOVERLAYER
 };
 
 

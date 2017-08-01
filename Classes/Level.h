@@ -13,6 +13,8 @@ public:
 	// load map from data file tiled 
 	void loadMap(const char * mapName);
 
+	float getWidth();
+
 	cocos2d::TMXTiledMap* getMapLevel();
 
 	cocos2d::TMXTiledMap *mapLevel;

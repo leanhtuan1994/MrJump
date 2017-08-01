@@ -28,9 +28,9 @@ void Ground::getGroundDataInLevel(cocos2d::TMXTiledMap *map) {
 
 		// Create Physics body 
 		auto groudBody = cocos2d::PhysicsBody::createBox(groudNode->getContentSize(), PHYSICSBODY_MATERIAL_DEFAULT);
+		groudBody->setDynamic(false);
 		groudBody->setCollisionBitmask(GROUND_COLLISION_BITMASK);
 		groudBody->setContactTestBitmask(true);
-		groudBody->setDynamic(false);
 
 		// Added physics body to node and add to list node 
 		groudNode->setPhysicsBody(groudBody);

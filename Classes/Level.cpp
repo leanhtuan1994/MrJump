@@ -23,4 +23,8 @@ cocos2d::TMXTiledMap* Level::getMapLevel() {
 	return this->mapLevel;
 }
 
+float Level::getWidth() {
+	return (this->mapLevel->getMapSize().width * this->getMapLevel()->getTileSize().width );
+}
+
 

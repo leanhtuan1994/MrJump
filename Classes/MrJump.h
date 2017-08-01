@@ -22,13 +22,15 @@ public:
 
 	cocos2d::Point getPositionTiled( cocos2d::TMXTiledMap *tileMap);
 
-	cocos2d::RepeatForever *runningForever();
+	cocos2d::RepeatForever *runningForever;
+
+	void runningAction();
+	void stopRunningAction();
 
 
 	void jump() {
 		if (isGrounded) {
 			state = STATE::JUMP;
-			isGrounded = false;
 		}
 	}
 
@@ -36,6 +38,9 @@ public:
 		state = STATE::RUN;
 	}
 
+	void die() {
+		state = STATE::DEAD;
+	}
 
 	bool isGrounded;
 

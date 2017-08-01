@@ -105,7 +105,7 @@
                 <EndColor A="255" R="255" G="255" B="255" />
                 <ColorVector ScaleY="1.0000" />
               </AbstractNodeData>
-              <AbstractNodeData Name="Panel_Level_3" ActionTag="55005162" ZOrder="2" Tag="10" IconVisible="False" LeftMargin="888.0000" TouchEnable="True" ClipAble="False" BackColorAlpha="102" ComboBoxIndex="1" ColorAngle="90.0000" ctype="PanelObjectData">
+              <AbstractNodeData Name="Panel_Level_3" ActionTag="55005162" ZOrder="2" Tag="10" IconVisible="False" LeftMargin="888.0000" TouchEnable="True" ClipAble="False" BackColorAlpha="102" ComboBoxIndex="1" ColorAngle="90.0000" Scale9Width="1" Scale9Height="1" ctype="PanelObjectData">
                 <Size X="444.0000" Y="750.0000" />
                 <Children>
                   <AbstractNodeData Name="Level3Selection_1" ActionTag="781103981" Tag="11" IconVisible="False" PositionPercentXEnabled="True" PositionPercentYEnabled="True" ctype="SpriteObjectData">

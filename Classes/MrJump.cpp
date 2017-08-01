@@ -21,7 +21,7 @@ MrJump * MrJump::create() {
 	player->isGrounded = true;
 
 	/* init physics body */
-	auto body = cocos2d::PhysicsBody::createBox(cocos2d::Size(player->getContentSize().width - 5, player->getContentSize().height - 14), 
+	auto body = cocos2d::PhysicsBody::createBox(cocos2d::Size(player->getContentSize().width - 5, player->getContentSize().height - 10), 
 		cocos2d::PhysicsMaterial(1.0f, 0.0f, 0.0f));
 	
 	body->setRotationEnable(false);
@@ -34,6 +34,7 @@ MrJump * MrJump::create() {
 	/* set physics body for sprite */
 	player->setPhysicsBody(body);
 
+	player->state = STATE::RUN;
 	return player;
 }
 
@@ -53,7 +54,7 @@ cocos2d::Point MrJump::getPositionTiled(cocos2d::TMXTiledMap *tileMap) {
 }
 
 
-cocos2d::RepeatForever* MrJump::runningForever() {
+void MrJump::runningAction() {
 	int numFrame = NUM_FRAME_ANIMATION_JUMP;
 
 	cocos2d::Vector<cocos2d::SpriteFrame *> frames;
@@ -69,27 +70,32 @@ cocos2d::RepeatForever* MrJump::runningForever() {
 
 	cocos2d::Animation *animation = cocos2d::Animation::createWithSpriteFrames(frames, ANIMATION_DELAY_TIME_JUMP);
 	cocos2d::Animate *animate = cocos2d::Animate::create(animation);
-	cocos2d::RepeatForever *repeat = cocos2d::RepeatForever::create(animate);
 
-	repeat->retain();
-	return repeat;
+	this->runningForever = cocos2d::RepeatForever::create(animate);
+	this->runningForever->retain();
+
+	this->runAction(this->runningForever);
+}
+
+
+void MrJump::stopRunningAction() {
+	this->stopAction(this->runningForever);
 }
 
 
 void MrJump::setActionOfState() {
-	this->setPositionX(this->getPositionX() + 5.5f);
-
 	switch (state) {
 	case RUN:
+		this->setPositionX(this->getPositionX() + 5.5f);
 		break;
 
 	case JUMP:
-		this->setPositionY(this->getPositionY() + 9.0f);
-
+		this->setPositionX(this->getPositionX() + 5.5f);
+		this->setPositionY(this->getPositionY() + 8.0f);
 		break;
 
 	case DEAD:
-
+		
 		break;
 	}
 }

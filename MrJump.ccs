@@ -27,7 +27,6 @@
           <Image Name="CloseButtonNormal.png" />
           <Image Name="CloseButtonSelected.png" />
           <Image Name="dau.png" />
-          <File Name="Game Button.psd" />
           <Image Name="InfoButtonNormal.png" />
           <Image Name="InfoButtonSelected.png" />
           <Image Name="Jump.png" />
@@ -39,6 +38,8 @@
           <Image Name="Level3Selection.png" />
           <Image Name="Lock.png" />
           <Image Name="MrJump Icon.png" />
+          <Image Name="PlayAgainButtonNormal.png" />
+          <Image Name="PlayAgainButtonSelected.png" />
           <Image Name="quan.png" />
           <Image Name="RateButtonNormal.png" />
           <Image Name="RateButtonSelected.png" />
@@ -56,6 +57,7 @@
         <Project Name="MainMenuScene.csd" Type="Scene" />
         <Project Name="Player.csd" Type="Skeleton" />
         <Project Name="SettingScene.csd" Type="Scene" />
+        <Project Name="GameOverLayer.csd" Type="Layer" />
       </RootFolder>
     </Group>
   </SolutionFolder>

@@ -29,9 +29,9 @@ public:
 	void onTouchEnded(cocos2d::Touch *touch, cocos2d::Event *unused_event);
 
 	bool onContactBegin(cocos2d::PhysicsContact &contact);
+	void onContactSeparate(cocos2d::PhysicsContact &contact);
 
-
-	void gotoGameOverScene(float dt = 0.0f);
+	void addGameOverLayer();
 
 private:
 
@@ -58,6 +58,11 @@ private:
 	// create camera 
 	cocos2d::Follow *camera;
 	cocos2d::Sprite *cameraTarget;
+
+	// listener 
+	cocos2d::EventListenerTouchOneByOne *touchListener;
+	cocos2d::EventListenerPhysicsContact *contactListener;
+
 
 
 	float limitedCameraPositionX;
