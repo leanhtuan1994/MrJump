@@ -15,7 +15,6 @@
 [Dd]ebugPublic/
 [Rr]elease/
 [Rr]eleases/
-[co]cos2d/
 x64/
 x86/
 bld/
@@ -304,3 +303,5 @@ $RECYCLE.BIN/
 *.lnk
 proj.win32/Debug.win32/zlib1.dll
 proj.win32/Debug.win32/CloseNormal.png
+
+cocos2d/

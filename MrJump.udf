@@ -28,18 +28,5 @@
         <LastRunType Value="Android" />
       </Value>
     </Item>
-    <Item Key="TabsParamsKey">
-      <Value ctype="TabsInfo">
-        <OpenedDocuments>
-          <FilePathData Path="Player.csd" />
-          <FilePathData Path="SettingScene.csd" />
-          <FilePathData Path="MainMenuScene.csd" />
-          <FilePathData Path="GameScene.csd" />
-          <FilePathData Path="LevelSelectionScene.csd" />
-          <FilePathData Path="GameOverLayer.csd" />
-        </OpenedDocuments>
-        <ActiveDocument Path="GameOverLayer.csd" />
-      </Value>
-    </Item>
   </Properties>
 </UserData>

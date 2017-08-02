@@ -16,7 +16,7 @@ Scene* GameScene::createScene()
 	scene->getPhysicsWorld()->setDebugDrawMask(PhysicsWorld::DEBUGDRAW_ALL);
 
 	/* set gravity for physics world */
-	scene->getPhysicsWorld()->setGravity(cocos2d::Vec2(0.0f, -500.0f));
+	scene->getPhysicsWorld()->setGravity(cocos2d::Vec2(0.0f, -600.0f));
 
     
     // 'layer' is an autorelease object
@@ -39,11 +39,29 @@ bool GameScene::init(){
         return false;
     }
 
-	/* Get size */
+	/*
+	* Get visibleSize and origin from device	
+	*
+	*/
 	visibleSize = Director::getInstance()->getVisibleSize();
 	origin = Director::getInstance()->getVisibleOrigin();
+
+
+	/*
+	*	SET limitedCameraPositionX to don't move camera when camera target position x < 1/4 width 
+	*/
 	limitedCameraPositionX = (visibleSize.width + origin.x) / 4;
+
+	/* 
+	*	SET space width Camera - Mr Jump 
+	*	Camera =  1/2 width  
+	*	Mr Jump  =  1/4 
+	*/
 	spaceCameraPositionX = visibleSize.width / 2 + origin.x - limitedCameraPositionX;
+
+	/* 
+	*	SET limited time for touch to jump mr.jump
+	*/
 	isTouchTimeForJump = false;
 
 	/*  Get level selected */
@@ -51,63 +69,79 @@ bool GameScene::init(){
 	this->currentLevelSelected = userdefault->getIntegerForKey("Level");
 
 
-	/* init level map	  */
+	/* init level map */
 	this->level = new Level();
+
+	/* SET LEVEL IN THE GAME */
 	if (currentLevelSelected == LEVEL_NAME::LEVEL_1) {
 		level->loadMap("level1.tmx");
 	}
+
+	/* RETAIN Level to the scene */
 	level->retain();
+
+	/* ADD LEVEL IN THE SCENE */
 	this->addChild(level->getMapLevel(), TAG_ZORDER::MAP);
 	
 
-	/* init box for world */ 
-	int bodyHeight = level->getMapLevel()->getMapSize().width * level->getMapLevel()->getTileSize().width;
-	auto edgeBody = PhysicsBody::createEdgeBox(cocos2d::Size( visibleSize.width+ origin.x, visibleSize.height + origin.y), 
-		PHYSICSSHAPE_MATERIAL_DEFAULT, 5.0F);
+	/************************************************************************/
+	/*                SET BOX IN THE SCENE									*/
+	/************************************************************************/
 
+	auto edgeBody = PhysicsBody::createEdgeBox(
+		cocos2d::Size( visibleSize.width+ origin.x, visibleSize.height + origin.y), 
+		PHYSICSSHAPE_MATERIAL_DEFAULT, 5.0F);
 	edgeBody->setDynamic(false);
 	edgeNode = Node::create();
 	edgeNode->setPosition( visibleSize.width /2 + origin.x , visibleSize.height/2 + origin.y);
 	edgeNode->setPhysicsBody(edgeBody);
 	this->addChild(edgeNode);
 
-	/* init player object */
+
+
+	/************************************************************************/
+	/*								INIT MR JUMP							*/				
+	/************************************************************************/
 	mrJump = MrJump::create();	
 	mrJump->retain();
-	// get position in the map 
-	Point playerPosition = mrJump->getPositionTiled(level->getMapLevel());
-	mrJump->setPosition(playerPosition.x, playerPosition.y);
-
-	mrJump->getPhysicsBody()->setDynamic(true);
+	mrJump->setPosition(mrJump->getPositionTiled(level->getMapLevel()));
 	this->addChild(mrJump, TAG_ZORDER::PLAYER);
 	mrJump->runningAction();
   
 
-	/* init camera */
+	/************************************************************************/
+	/*						INIT CAMERA TO FOLLOW MR JUMP 
+	/************************************************************************/
 	cameraTarget = cocos2d::Sprite::create();
 	cameraTarget->setPosition( visibleSize.width / 2 + origin.x , visibleSize.height / 2 + origin.y);
 	cameraTarget->retain();
 	this->addChild(cameraTarget);
-
 	/* set camera follow target */
 	camera = cocos2d::Follow::create(cameraTarget, cocos2d::Rect::ZERO);
 	camera->retain();
 	this->runAction(camera);
 
 
-	/* Init Ground 	*/
+	/************************************************************************/
+	/*						INIT GROUND OBJECTS                                                                   
+	/************************************************************************/
 	ground = new Ground();
 	ground->getGroundDataInLevel(level->getMapLevel());	 
 	ground->addGroundInScene(this);
 	
 
-	/* init Sea	*/
+	/************************************************************************/
+	/*						INIT SEA OBJECTS                                                                     
+	/************************************************************************/
 	sea = new Sea();
 	sea->getSeaDataInLevel(level->getMapLevel());
 	sea->addSeaInScene(this);
 	
 
-	/* listener touch event */
+
+	/************************************************************************/
+	/*					LISTENER TOUCH EVENT                                                                      
+	/************************************************************************/
 	touchListener = cocos2d::EventListenerTouchOneByOne::create();
 	touchListener->setSwallowTouches(true);
 	touchListener->onTouchBegan = CC_CALLBACK_2(GameScene::onTouchBegan, this);
@@ -116,17 +150,20 @@ bool GameScene::init(){
 	this->getEventDispatcher()->addEventListenerWithSceneGraphPriority(touchListener, this);
 
 
-	/* listener physics contact */
+
+	/************************************************************************/
+	/*					LISTENER CONTACT COLLISION 
+	/************************************************************************/
 	contactListener = cocos2d::EventListenerPhysicsContact::create();
 	contactListener->onContactBegin = CC_CALLBACK_1(GameScene::onContactBegin, this);
 	contactListener->onContactSeparate = CC_CALLBACK_1(GameScene::onContactSeparate, this);
 	this->getEventDispatcher()->addEventListenerWithSceneGraphPriority(contactListener, this);
 
 
-	CCLOG("SIZE: %f", level->getWidth());
-
-
+	/* UPDATE EVERY FRAME */
 	this->scheduleUpdate();
+
+
     return true;
 }
 
@@ -144,6 +181,8 @@ void GameScene::update(float delta) {
 	cameraTarget->setPositionX( mrJump->getPositionX() < limitedCameraPositionX ? 
 		visibleSize.width / 2 + origin.x : mrJump->getPositionX() + spaceCameraPositionX);
 	edgeNode->setPositionX( cameraTarget->getPositionX());
+
+	CCLOG("STATE: %d", mrJump->state);
 }
 
 
@@ -202,10 +241,15 @@ bool GameScene::onContactBegin(cocos2d::PhysicsContact &contact) {
 
 		CCLOG(" MRJUMP + ENEMY -> COLLISION -- DIE");
 		this->mrJump->die();
+
 		mrJump->stopRunningAction();
 		this->sceneWorld->removeAllBodies();
 		this->getEventDispatcher()->removeEventListener(touchListener);
 		this->getEventDispatcher()->removeEventListener(contactListener);
+
+		/* turn of update */
+		this->unscheduleUpdate();
+
 
 		this->addGameOverLayer();
 	}

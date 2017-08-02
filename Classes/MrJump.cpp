@@ -21,11 +21,11 @@ MrJump * MrJump::create() {
 	player->isGrounded = true;
 
 	/* init physics body */
-	auto body = cocos2d::PhysicsBody::createBox(cocos2d::Size(player->getContentSize().width - 5, player->getContentSize().height - 10), 
+	auto body = cocos2d::PhysicsBody::createBox(cocos2d::Size(player->getContentSize().width - 7, player->getContentSize().height - 12), 
 		cocos2d::PhysicsMaterial(1.0f, 0.0f, 0.0f));
-	
 	body->setRotationEnable(false);
 	body->setLinearDamping(1.0f);
+	body->setDynamic(true);
 
 	/* set collision bitmask */
 	body->setCollisionBitmask(MRJUMP_COLLISION_BITMASK);
@@ -86,16 +86,16 @@ void MrJump::stopRunningAction() {
 void MrJump::setActionOfState() {
 	switch (state) {
 	case RUN:
-		this->setPositionX(this->getPositionX() + 5.5f);
+		this->setPositionX(this->getPositionX() + MRJUMP_RUNNING_SPEED);
 		break;
 
 	case JUMP:
-		this->setPositionX(this->getPositionX() + 5.5f);
-		this->setPositionY(this->getPositionY() + 8.0f);
+		this->setPositionX(this->getPositionX() + MRJUMP_RUNNING_SPEED);
+		this->setPositionY(this->getPositionY() + 9.2f);
 		break;
 
 	case DEAD:
-		
+
 		break;
 	}
 }
