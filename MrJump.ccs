@@ -52,12 +52,12 @@
           <Image Name="tay 2.png" />
           <Image Name="than.png" />
         </Folder>
+        <Project Name="GameOverLayer.csd" Type="Layer" />
         <Project Name="GameScene.csd" Type="Scene" />
         <Project Name="LevelSelectionScene.csd" Type="Scene" />
         <Project Name="MainMenuScene.csd" Type="Scene" />
         <Project Name="Player.csd" Type="Skeleton" />
         <Project Name="SettingScene.csd" Type="Scene" />
-        <Project Name="GameOverLayer.csd" Type="Layer" />
       </RootFolder>
     </Group>
   </SolutionFolder>

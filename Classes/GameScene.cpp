@@ -160,6 +160,57 @@ bool GameScene::init(){
 	this->getEventDispatcher()->addEventListenerWithSceneGraphPriority(contactListener, this);
 
 
+
+	/************************************************************************/
+	/*                                                                      */
+	/************************************************************************/
+
+	TMXObjectGroup *enemy = level->getMapLevel()->getObjectGroup("enemyObjects");
+	auto ob = enemy->getObjects();
+
+	for (int j = 0; j < ob.size(); j++) {
+
+		auto e = ob.at(j).asValueMap();
+
+		if (!e.empty()) {
+
+			auto points = e["points"].asValueVector();
+			int size = points.size();
+			Vec2 *p = new Vec2[size + 1];
+
+			for (int i = 0; i < size; i++) {
+				auto posPoint = points.at(i).asValueMap();
+				int x = posPoint["x"].asInt();
+				int y = posPoint["y"].asInt();
+
+				p[i].x = x;
+				p[i].y = y;
+			}
+
+			p[size].x = p[0].x;
+			p[size].y = p[0].y;
+
+			auto body = PhysicsBody::createEdgePolygon(p, size + 1, PHYSICSBODY_MATERIAL_DEFAULT, 2.0F);
+
+			body->setDynamic(false);
+			auto node = Node::create();
+			node->setPosition(e["x"].asInt(), e["y"].asInt());
+			node->setPhysicsBody(body);
+			node->setRotation(180.0f);
+
+			this->addChild(node);
+		}
+	}
+	
+
+	
+
+
+
+
+
+
+
 	/* UPDATE EVERY FRAME */
 	this->scheduleUpdate();
 
