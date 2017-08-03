@@ -2,6 +2,7 @@
 #include "GameScene.h"
 #include "MainMenuScene.h"
 #include "Definitions.h"
+#include "SimpleAudioEngine.h"
 USING_NS_CC;
 
 
@@ -48,6 +49,7 @@ bool GameOverScene::init()
 		case cocos2d::ui::Widget::TouchEventType::BEGAN:
 			break;
 		case cocos2d::ui::Widget::TouchEventType::ENDED:
+			/* pause music */
 			auto menuScene = MainMenuScene::createScene();
 			cocos2d::Director::getInstance()->replaceScene(TransitionMoveInL::create(TRANSITION_TIME, menuScene));
 			break;

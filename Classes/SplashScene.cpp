@@ -1,9 +1,9 @@
 #include "SplashScene.h"
 #include "MainMenuScene.h"
-#include "GameScene.h"
 #include "Definitions.h"
 #include "cocostudio/CocoStudio.h"
 #include "ui/CocosGUI.h"
+#include "SimpleAudioEngine.h"
 
 USING_NS_CC;
 
@@ -36,7 +36,19 @@ bool SplashScene::init()
         return false;
     }
 
-	
+	CocosDenshion::SimpleAudioEngine::getInstance()->preloadBackgroundMusic("Mr_Jump_Background.wav");
+	CocosDenshion::SimpleAudioEngine::getInstance()->preloadEffect("Mr_Jump_Music_Level_1.wav");
+
+
+	if (! CocosDenshion::SimpleAudioEngine::getInstance()->isBackgroundMusicPlaying()) {
+		CocosDenshion::SimpleAudioEngine::getInstance()->playBackgroundMusic("Mr_Jump_Background.wav", true);
+	}
+
+	auto userdefault = UserDefault::getInstance();
+	userdefault->setIntegerForKey("SOUNDLEVELID", -1);
+
+
+
 	this->scheduleOnce(schedule_selector(SplashScene::gotoMainMenuScene), DISPLAY_TIME_SPLASH_SCENE);
 
     return true;

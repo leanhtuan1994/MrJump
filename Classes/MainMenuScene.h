@@ -24,6 +24,7 @@ public:
 
 	void gotoLevelSelectionScene();
 
+	void setMusicEffect();
 
 private:
 	cocos2d::Sprite *tapTopPlay;

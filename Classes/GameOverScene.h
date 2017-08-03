@@ -16,6 +16,7 @@ public:
     // implement the "static create()" method manually
 	CREATE_FUNC(GameOverScene);
 
+
 private:
 
 	cocos2d::ui::Button *btnPlayAgain;

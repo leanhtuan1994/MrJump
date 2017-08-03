@@ -2,7 +2,8 @@
 #include "LevelSelectionScene.h"
 #include "Definitions.h"
 #include "SettingScene.h"
-
+#include "SimpleAudioEngine.h"
+#include "SplashScene.h"
 #include "cocostudio/CocoStudio.h"
 
 USING_NS_CC;
@@ -36,6 +37,9 @@ bool MainMenuScene::init()
         return false;
     }
     
+	setMusicEffect();
+
+
     auto rootNode = CSLoader::createNode("MainMenuScene.csb");
 
 	
@@ -88,4 +92,17 @@ bool MainMenuScene::onTouchBegan(Touch *touch, Event *unused_event) {
 void MainMenuScene::gotoLevelSelectionScene() {
 	auto scene = LevelSelectionScene::createScene();
 	Director::getInstance()->replaceScene(TransitionMoveInR::create(TRANSITION_TIME_MOVE_IN_R, scene));
+}
+
+
+void MainMenuScene::setMusicEffect() {
+	if (! CocosDenshion::SimpleAudioEngine::getInstance()->isBackgroundMusicPlaying()) {
+		CocosDenshion::SimpleAudioEngine::getInstance()->playBackgroundMusic("Mr_Jump_Background.wav", true);
+	}
+
+	auto userdefault = UserDefault::getInstance();
+	int  soundLevelID = userdefault->getIntegerForKey("SOUNDLEVELID");
+	if (soundLevelID != -1) {
+		CocosDenshion::SimpleAudioEngine::getInstance()->stopEffect(soundLevelID);
+	}
 }

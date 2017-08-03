@@ -64,7 +64,6 @@ private:
 	cocos2d::EventListenerPhysicsContact *contactListener;
 
 
-
 	float limitedCameraPositionX;
 	float spaceCameraPositionX;
 
@@ -73,6 +72,8 @@ private:
 	
 	// check time over to stop jumpping 
 	bool isTouchTimeForJump;
+
+	int soundLevelID;
 
 };
 

@@ -4,6 +4,8 @@
 #include "ui/CocosGUI.h"
 #include "GameOverScene.h"
 #include "MainMenuScene.h"
+#include "SimpleAudioEngine.h"
+#include "SplashScene.h"
 
 USING_NS_CC;
 
@@ -47,6 +49,7 @@ bool GameScene::init(){
 	origin = Director::getInstance()->getVisibleOrigin();
 
 
+
 	/*
 	*	SET limitedCameraPositionX to don't move camera when camera target position x < 1/4 width 
 	*/
@@ -67,6 +70,20 @@ bool GameScene::init(){
 	/*  Get level selected */
 	auto userdefault = UserDefault::getInstance();
 	this->currentLevelSelected = userdefault->getIntegerForKey("Level");
+
+
+	/************************************************************************/
+	/*			PKAY MUSIC
+	/************************************************************************/
+	if (CocosDenshion::SimpleAudioEngine::getInstance()->isBackgroundMusicPlaying()) {
+		CocosDenshion::SimpleAudioEngine::getInstance()->pauseBackgroundMusic();
+	}
+
+	if (this->currentLevelSelected == LEVEL_NAME::LEVEL_1) {
+		this->soundLevelID = CocosDenshion::SimpleAudioEngine::getInstance()->playEffect("Mr_Jump_Music_Level_1.wav", true);
+		userdefault->setIntegerForKey("SOUNDLEVELID", soundLevelID);
+	}
+
 
 
 	/* init level map */
@@ -203,14 +220,6 @@ bool GameScene::init(){
 	}
 	
 
-	
-
-
-
-
-
-
-
 	/* UPDATE EVERY FRAME */
 	this->scheduleUpdate();
 
@@ -301,7 +310,6 @@ bool GameScene::onContactBegin(cocos2d::PhysicsContact &contact) {
 		/* turn of update */
 		this->unscheduleUpdate();
 
-
 		this->addGameOverLayer();
 	}
 
@@ -327,6 +335,7 @@ void GameScene::onContactSeparate(cocos2d::PhysicsContact &contact) {
 
 void GameScene::addGameOverLayer() {
 	auto gameOverLayer = GameOverScene::create();
+
 	gameOverLayer->setPosition( cameraTarget->getPositionX() - visibleSize.width/2 - origin.x, 
 		cameraTarget->getPositionY() - visibleSize.height/2 - origin.y);
 
