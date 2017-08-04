@@ -43,6 +43,7 @@
           <Image Name="quan.png" />
           <Image Name="RateButtonNormal.png" />
           <Image Name="RateButtonSelected.png" />
+          <TTF Name="Roboto-Black.ttf" />
           <Image Name="settingnormalicon.png" />
           <Image Name="settingselectedicon.png" />
           <Image Name="SoundBackgroundButtonNormal.png" />

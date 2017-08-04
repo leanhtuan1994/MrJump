@@ -28,7 +28,7 @@ void Sea::getSeaDataInLevel(cocos2d::TMXTiledMap *map) {
 
 		// Create Physics body 
 		auto seaBody = cocos2d::PhysicsBody::createBox(seaNode->getContentSize(), PHYSICSBODY_MATERIAL_DEFAULT);
-		seaBody->setCollisionBitmask(ENEMY_COLLISION_BITMASK);
+		seaBody->setCollisionBitmask(HAZARD_COLLISION_BITMASK);
 		seaBody->setContactTestBitmask(true);
 		seaBody->setDynamic(false);
 

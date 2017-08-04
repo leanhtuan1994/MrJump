@@ -27,10 +27,12 @@ void Ground::getGroundDataInLevel(cocos2d::TMXTiledMap *map) {
 		groudNode->setPosition(cocos2d::Vec2(grounds[i].asValueMap()["x"].asInt(), grounds[i].asValueMap()["y"].asInt()));
 
 		// Create Physics body 
-		auto groudBody = cocos2d::PhysicsBody::createBox(groudNode->getContentSize(), PHYSICSBODY_MATERIAL_DEFAULT);
+		auto groudBody = cocos2d::PhysicsBody::createBox(groudNode->getContentSize(), cocos2d::PhysicsMaterial(1.0f, 0.0f, 1.0f) );
 		groudBody->setDynamic(false);
 		groudBody->setCollisionBitmask(GROUND_COLLISION_BITMASK);
 		groudBody->setContactTestBitmask(true);
+		groudBody->setLinearDamping(1.0f);
+		
 
 		// Added physics body to node and add to list node 
 		groudNode->setPhysicsBody(groudBody);

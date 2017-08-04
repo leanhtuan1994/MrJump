@@ -29,9 +29,7 @@ public:
 
 
 	void jump() {
-		if (isGrounded) {
-			state = STATE::JUMP;
-		}
+		state = STATE::JUMP;
 	}
 
 	void stopJump() {

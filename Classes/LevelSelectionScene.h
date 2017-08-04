@@ -25,6 +25,8 @@ private:
 	
 	cocos2d::ui::PageView *pageView;
 	cocos2d::ui::Layout *panelLevel1;
+
+
 };
 
 #endif // __LEVE_SELECTION_SCENE_H__

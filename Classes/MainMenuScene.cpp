@@ -133,5 +133,6 @@ void MainMenuScene::setMusicEffect() {
 	int  soundLevelID = userdefault->getIntegerForKey(USER_DATA_KEY_MUSIC_EFFECT);
 	if (soundLevelID != MUSIC_EFFECT_LEVEL_TURN_OFF) {
 		CocosDenshion::SimpleAudioEngine::getInstance()->stopEffect(soundLevelID);
+		userdefault->setIntegerForKey(USER_DATA_KEY_MUSIC_EFFECT, MUSIC_EFFECT_LEVEL_TURN_OFF);
 	}
 }

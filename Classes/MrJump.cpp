@@ -21,8 +21,8 @@ MrJump * MrJump::create() {
 	player->isGrounded = true;
 
 	/* init physics body */
-	auto body = cocos2d::PhysicsBody::createBox(cocos2d::Size(player->getContentSize().width - 7, player->getContentSize().height - 12), 
-		cocos2d::PhysicsMaterial(1.0f, 0.0f, 0.0f));
+	auto body = cocos2d::PhysicsBody::createBox(cocos2d::Size(player->getContentSize().width - 5, player->getContentSize().height - 8), 
+		cocos2d::PhysicsMaterial(1.0f, 0.0f, 1.0f));
 	body->setRotationEnable(false);
 	body->setLinearDamping(1.0f);
 	body->setDynamic(true);
@@ -86,11 +86,11 @@ void MrJump::stopRunningAction() {
 void MrJump::setActionOfState() {
 	switch (state) {
 	case RUN:
-		this->setPositionX(this->getPositionX() + MRJUMP_RUNNING_SPEED);
+	//	this->setPositionX(this->getPositionX() + MRJUMP_RUNNING_SPEED);
 		break;
 
 	case JUMP:
-		this->setPositionX(this->getPositionX() + MRJUMP_RUNNING_SPEED);
+	//	this->setPositionX(this->getPositionX() + MRJUMP_RUNNING_SPEED);
 		this->setPositionY(this->getPositionY() + 9.2f);
 		break;
 

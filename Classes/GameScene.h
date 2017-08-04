@@ -6,6 +6,7 @@
 #include "MrJump.h"
 #include "Ground.h"	 
 #include "Sea.h"
+#include "Hazard.h"
 
 
 
@@ -33,6 +34,8 @@ public:
 
 	void addGameOverLayer();
 
+	void setStatusMrJumpDie();
+
 private:
 
 	cocos2d::PhysicsWorld*	sceneWorld;
@@ -49,6 +52,7 @@ private:
 	MrJump	*mrJump;
 	Ground	*ground;
 	Sea		*sea;
+	Hazard	*hazard;
 
 
 	cocos2d::Node *edgeNode;
@@ -67,13 +71,21 @@ private:
 	float limitedCameraPositionX;
 	float spaceCameraPositionX;
 
+	/* user data */
+	cocos2d::UserDefault *userDafault;
+
 	// get time when touch began 
 	long long timeTouchBegan;
 	
-	// check time over to stop jumpping 
+	// check time over to stop jumping 
 	bool isTouchTimeForJump;
 
 	int soundLevelID;
+
+	/* counting number of jump */
+	int numberJumped;
+
+	int percentWidthOfMrJump;
 
 };
 

@@ -7,6 +7,7 @@
 #include "SimpleAudioEngine.h"
 #include "SplashScene.h"
 
+
 USING_NS_CC;
 
 using namespace cocostudio::timeline;
@@ -18,7 +19,7 @@ Scene* GameScene::createScene()
 	scene->getPhysicsWorld()->setDebugDrawMask(PhysicsWorld::DEBUGDRAW_ALL);
 
 	/* set gravity for physics world */
-	scene->getPhysicsWorld()->setGravity(cocos2d::Vec2(0.0f, -600.0f));
+	scene->getPhysicsWorld()->setGravity(cocos2d::Vec2(0.0f, -700.0f));
 
     
     // 'layer' is an autorelease object
@@ -41,18 +42,11 @@ bool GameScene::init(){
         return false;
     }
 
-	/*
-	* Get visibleSize and origin from device	
-	*
-	*/
+	/* Get visibleSize and origin from device	*/
 	visibleSize = Director::getInstance()->getVisibleSize();
 	origin = Director::getInstance()->getVisibleOrigin();
 
-
-
-	/*
-	*	SET limitedCameraPositionX to don't move camera when camera target position x < 1/4 width 
-	*/
+	/*	SET limitedCameraPositionX to don't move camera when camera target position x < 1/4 width */
 	limitedCameraPositionX = (visibleSize.width + origin.x) / 4;
 
 	/* 
@@ -62,14 +56,20 @@ bool GameScene::init(){
 	*/
 	spaceCameraPositionX = visibleSize.width / 2 + origin.x - limitedCameraPositionX;
 
-	/* 
-	*	SET limited time for touch to jump mr.jump
-	*/
+	/* 	SET limited time for touch to jump mr.jump */
 	isTouchTimeForJump = false;
 
+	/* INIT number of jumped */
+	this->numberJumped = 0;
+	percentWidthOfMrJump = 0;
+
 	/*  Get level selected */
-	auto userdefault = UserDefault::getInstance();
-	this->currentLevelSelected = userdefault->getIntegerForKey("Level");
+	userDafault = UserDefault::getInstance();
+	this->currentLevelSelected = userDafault->getIntegerForKey("Level");
+
+	/* init data is 0 */
+	this->userDafault->setIntegerForKey(USER_DATA_KEY_NUMBER_JUMPS, 0);
+	this->userDafault->setIntegerForKey(USER_DATA_KEY_SCORE_PERCENT, 0);
 
 
 	/************************************************************************/
@@ -79,12 +79,14 @@ bool GameScene::init(){
 		CocosDenshion::SimpleAudioEngine::getInstance()->pauseBackgroundMusic();
 	}
 
-	if (this->currentLevelSelected == LEVEL_NAME::LEVEL_1) {
-		this->soundLevelID = CocosDenshion::SimpleAudioEngine::getInstance()->playEffect(FILEPATH_LEVEL_MUSIC_EFFECT, true);
-		userdefault->setIntegerForKey(USER_DATA_KEY_MUSIC_EFFECT, soundLevelID);
+
+	this->soundLevelID = userDafault->getIntegerForKey(USER_DATA_KEY_MUSIC_EFFECT);
+	if (this->soundLevelID == MUSIC_EFFECT_LEVEL_TURN_OFF) {
+		if (this->currentLevelSelected == LEVEL_NAME::LEVEL_1) {
+			this->soundLevelID = CocosDenshion::SimpleAudioEngine::getInstance()->playEffect(FILEPATH_LEVEL_MUSIC_EFFECT, true);
+			userDafault->setIntegerForKey(USER_DATA_KEY_MUSIC_EFFECT, this->soundLevelID);
+		}
 	}
-
-
 
 	/* init level map */
 	this->level = new Level();
@@ -148,12 +150,22 @@ bool GameScene::init(){
 	
 
 	/************************************************************************/
-	/*						INIT SEA OBJECTS                                                                     
+	/*							INIT SEA OBJECTS                                                                     
 	/************************************************************************/
 	sea = new Sea();
 	sea->getSeaDataInLevel(level->getMapLevel());
 	sea->addSeaInScene(this);
 	
+
+	/************************************************************************/
+	/*							INIT HAZARD
+	/************************************************************************/
+
+	hazard = new Hazard();
+	hazard->getHazardDataInLevel(level->getMapLevel());
+	hazard->addHazardInScene(this);
+
+
 
 
 	/************************************************************************/
@@ -175,49 +187,6 @@ bool GameScene::init(){
 	contactListener->onContactBegin = CC_CALLBACK_1(GameScene::onContactBegin, this);
 	contactListener->onContactSeparate = CC_CALLBACK_1(GameScene::onContactSeparate, this);
 	this->getEventDispatcher()->addEventListenerWithSceneGraphPriority(contactListener, this);
-
-
-
-	/************************************************************************/
-	/*                                                                      */
-	/************************************************************************/
-
-	TMXObjectGroup *enemy = level->getMapLevel()->getObjectGroup("enemyObjects");
-	auto ob = enemy->getObjects();
-
-	for (int j = 0; j < ob.size(); j++) {
-
-		auto e = ob.at(j).asValueMap();
-
-		if (!e.empty()) {
-
-			auto points = e["points"].asValueVector();
-			int size = points.size();
-			Vec2 *p = new Vec2[size + 1];
-
-			for (int i = 0; i < size; i++) {
-				auto posPoint = points.at(i).asValueMap();
-				int x = posPoint["x"].asInt();
-				int y = posPoint["y"].asInt();
-
-				p[i].x = x;
-				p[i].y = y;
-			}
-
-			p[size].x = p[0].x;
-			p[size].y = p[0].y;
-
-			auto body = PhysicsBody::createEdgePolygon(p, size + 1, PHYSICSBODY_MATERIAL_DEFAULT, 2.0F);
-
-			body->setDynamic(false);
-			auto node = Node::create();
-			node->setPosition(e["x"].asInt(), e["y"].asInt());
-			node->setPhysicsBody(body);
-			node->setRotation(180.0f);
-
-			this->addChild(node);
-		}
-	}
 	
 
 	/* UPDATE EVERY FRAME */
@@ -242,7 +211,6 @@ void GameScene::update(float delta) {
 		visibleSize.width / 2 + origin.x : mrJump->getPositionX() + spaceCameraPositionX);
 	edgeNode->setPositionX( cameraTarget->getPositionX());
 
-	CCLOG("STATE: %d", mrJump->state);
 }
 
 
@@ -252,9 +220,13 @@ bool GameScene::onTouchBegan(cocos2d::Touch *touch, cocos2d::Event *unused_event
 	isTouchTimeForJump = true;
 
 	this->timeTouchBegan = utils::getTimeInMilliseconds();
-	CCLOG("Time touchbegan: %d", this->timeTouchBegan);
 
-	mrJump->jump();
+	if (mrJump->isGrounded) {
+		this->numberJumped++;
+		mrJump->jump();
+
+		CCLOG("NUMBER JUMPED : %d", this->numberJumped);
+	}
 
 	return true;
 }
@@ -296,21 +268,11 @@ bool GameScene::onContactBegin(cocos2d::PhysicsContact &contact) {
 	}
 
 	// Check if mr jump have collision with ground 
-	if ((bodyA->getCollisionBitmask() == MRJUMP_COLLISION_BITMASK && bodyB->getCollisionBitmask() == ENEMY_COLLISION_BITMASK) ||
-		(bodyA->getCollisionBitmask() == ENEMY_COLLISION_BITMASK && bodyB->getCollisionBitmask() == MRJUMP_COLLISION_BITMASK)) {
+	if ((bodyA->getCollisionBitmask() == MRJUMP_COLLISION_BITMASK && bodyB->getCollisionBitmask() == HAZARD_COLLISION_BITMASK) ||
+		(bodyA->getCollisionBitmask() == HAZARD_COLLISION_BITMASK && bodyB->getCollisionBitmask() == MRJUMP_COLLISION_BITMASK)) {
 
 		CCLOG(" MRJUMP + ENEMY -> COLLISION -- DIE");
-		this->mrJump->die();
-
-		mrJump->stopRunningAction();
-		this->sceneWorld->removeAllBodies();
-		this->getEventDispatcher()->removeEventListener(touchListener);
-		this->getEventDispatcher()->removeEventListener(contactListener);
-
-		/* turn of update */
-		this->unscheduleUpdate();
-
-		this->addGameOverLayer();
+		this->setStatusMrJumpDie();
 	}
 
 	return true;
@@ -343,7 +305,30 @@ void GameScene::addGameOverLayer() {
 }
 
 
+void GameScene::setStatusMrJumpDie() {
+	this->mrJump->die();
 
+	mrJump->stopRunningAction();
+	this->sceneWorld->removeAllBodies();
+	this->getEventDispatcher()->removeEventListener(touchListener);
+	this->getEventDispatcher()->removeEventListener(contactListener);
+
+	/* counting percent width of mr jump */
+	this->percentWidthOfMrJump = mrJump->getPositionX() / level->getWidth() * 100;
+	CCLOG("PERCENT WIDTH: %d", this->percentWidthOfMrJump);
+
+	/* turn of update */
+	this->unscheduleUpdate();
+
+
+	/* Save data */
+	this->userDafault->setIntegerForKey(USER_DATA_KEY_NUMBER_JUMPS, this->numberJumped);
+	this->userDafault->setIntegerForKey(USER_DATA_KEY_SCORE_PERCENT, this->percentWidthOfMrJump);
+
+
+
+	this->addGameOverLayer();
+}
 
 
 

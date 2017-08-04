@@ -3,8 +3,13 @@
 #include "MainMenuScene.h"
 #include "Definitions.h"
 #include "SimpleAudioEngine.h"
-USING_NS_CC;
 
+
+#define CHILD_NAME_LABEL_NUMBERJUMPS	"lblNumberJumps"
+#define CHILD_NAME_LABEL_SCOREPERCENT	"lblScorePercent"
+
+
+USING_NS_CC;
 
 
 // on "init" you need to initialize your instance
@@ -17,6 +22,10 @@ bool GameOverScene::init()
         return false;
     }
 
+	/* init user data default */
+	this->userDefault = cocos2d::UserDefault::getInstance();
+
+
 	/* Add node from cocos studio */
 	auto rootNode = CSLoader::createNode("GameOverLayer.csb");
 
@@ -26,6 +35,21 @@ bool GameOverScene::init()
 	actionTimeline->gotoFrameAndPlay(0, false);
 
 	this->addChild(rootNode);
+
+
+	/* INIT LABEL NUMBER JUMPS */
+	this->lblNumberJumps = (cocos2d::ui::Text *) rootNode->getChildByName(CHILD_NAME_LABEL_NUMBERJUMPS);
+	int numJumps = this->userDefault->getIntegerForKey(USER_DATA_KEY_NUMBER_JUMPS);
+	std::string numberJumpsString = std::to_string(numJumps) + " JUMPS";
+	this->lblNumberJumps->setString(numberJumpsString);
+
+	
+	/* INIT LABEL SCORE PERCENT */
+	this->lblScorePercent = (cocos2d::ui::Text *) rootNode->getChildByName(CHILD_NAME_LABEL_SCOREPERCENT);
+	int scoreInt = this->userDefault->getIntegerForKey(USER_DATA_KEY_SCORE_PERCENT);
+	std::string scoreString = std::to_string(scoreInt) + "%";
+	this->lblScorePercent->setString(scoreString);
+
 
 
 	/* Get btnPlayAgain and Add touch listener */
