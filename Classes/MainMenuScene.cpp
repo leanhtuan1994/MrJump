@@ -6,6 +6,12 @@
 #include "SplashScene.h"
 #include "cocostudio/CocoStudio.h"
 
+
+#define FILEPATH_ROOTNODE_MAINMENUSCENE		"MainMenuScene.csb"
+#define CHILD_NAME_BUTTON_SETTING			"btnSetting"
+#define CHILD_NAME_SPRITE_TAPTOPLAY			"spriteTapTopPlay"
+
+
 USING_NS_CC;
 
 using namespace cocostudio::timeline;
@@ -32,27 +38,38 @@ bool MainMenuScene::init()
     
     //////////////////////////////
     // 1. super init first
-    if ( !Layer::init() )
-    {
+    if ( !Layer::init() ) {
         return false;
     }
     
+	// SET MUSIC EFFECT FOR MAIN MENU SCENE
 	setMusicEffect();
 
 
-    auto rootNode = CSLoader::createNode("MainMenuScene.csb");
+	/************************************************************************/
+	/*			GET ROOT NODE DESIGN FROM COCOS STUDIO                                                                      
+	/************************************************************************/
+	auto rootNode = CSLoader::createNode(FILEPATH_ROOTNODE_MAINMENUSCENE);
 
-	
-	// Run animation
-	cocostudio::timeline::ActionTimeline *actionTimeline = CSLoader::createTimeline("MainMenuScene.csb");
+	/* GET ACTION FROM CSB FILE */
+	cocostudio::timeline::ActionTimeline *actionTimeline = CSLoader::createTimeline(FILEPATH_ROOTNODE_MAINMENUSCENE);
 	rootNode->runAction(actionTimeline);
 	actionTimeline->gotoFrameAndPlay(0, true);
 
     addChild(rootNode);
 
+	/************************************************************************/
+	/*          GET TAPTOPLAY SPRITE TO SET OPACITY FOLLOW UPDATE TIME 
+	/************************************************************************/
+	tapTopPlay = (Sprite *)rootNode->getChildByName(CHILD_NAME_SPRITE_TAPTOPLAY);
 
-	/* Button Setting listener */
-	btnSetting = (cocos2d::ui::Button *) rootNode->getChildByName("btnSetting");
+
+
+	/************************************************************************/
+	/*                 LISTENER TOUCH EVENT FOR BUTTON SETTING 
+	/*					TOUCH ENDED => GO TO SETTING SCENE			
+	/************************************************************************/
+	btnSetting = (cocos2d::ui::Button *) rootNode->getChildByName(CHILD_NAME_BUTTON_SETTING);
 	btnSetting->addTouchEventListener([](cocos2d::Ref *sender, cocos2d::ui::Widget::TouchEventType type) {
 		switch (type) {
 		case cocos2d::ui::Widget::TouchEventType::ENDED:
@@ -62,20 +79,25 @@ bool MainMenuScene::init()
 		}
 	});
 
-	// Get tap to play 
-	tapTopPlay = (Sprite *)rootNode->getChildByName("spriteTapTopPlay");
-	// Create a one by one touch event listener 
+
+	/************************************************************************/
+	/*		 LISTENER TOUCH EVENT TO SET GO TO THE LEVEL SELECTION SCENE                                                                   
+	/************************************************************************/
 	auto listener = EventListenerTouchOneByOne::create();
 	listener->onTouchBegan = CC_CALLBACK_2(MainMenuScene::onTouchBegan, this);
-
 	_eventDispatcher->addEventListenerWithSceneGraphPriority(listener, this);
 
+
+	/* SET UPDATE EVERY FRAME */
 	this->scheduleUpdate();
+
+
 
     return true;
 }
 
 
+/* EVERY FRAME CALL UPDATE */
 void MainMenuScene::update(float delta) {
 
 	// Update Opacity for taptopplay sprite 
@@ -84,25 +106,32 @@ void MainMenuScene::update(float delta) {
 	tapTopPlay->setOpacity(tapTopPlay->getOpacity() + tapOpacity);
 }
 
+
+/* SETTING WHEN TOUCH BEGAN */
 bool MainMenuScene::onTouchBegan(Touch *touch, Event *unused_event) {
 	gotoLevelSelectionScene();
 	return true;
 }
 
+/* GO TO THE LEVEL SELECTION SCENE WHEN TOUCH BEGAN */
 void MainMenuScene::gotoLevelSelectionScene() {
 	auto scene = LevelSelectionScene::createScene();
 	Director::getInstance()->replaceScene(TransitionMoveInR::create(TRANSITION_TIME_MOVE_IN_R, scene));
 }
 
 
+/* SET MUSIC EFFECT IN THIS SCENE */
 void MainMenuScene::setMusicEffect() {
+
+	/* SET PLAY BACKGROUND MUSIC */
 	if (! CocosDenshion::SimpleAudioEngine::getInstance()->isBackgroundMusicPlaying()) {
-		CocosDenshion::SimpleAudioEngine::getInstance()->playBackgroundMusic("Mr_Jump_Background.wav", true);
+		CocosDenshion::SimpleAudioEngine::getInstance()->playBackgroundMusic(FILEPATH_BACKGROUND_MUSIC, true);
 	}
 
+	/* GET ID MUSIC EFFECT THE THE LEVEL SCENE AND STOP IT */
 	auto userdefault = UserDefault::getInstance();
-	int  soundLevelID = userdefault->getIntegerForKey("SOUNDLEVELID");
-	if (soundLevelID != -1) {
+	int  soundLevelID = userdefault->getIntegerForKey(USER_DATA_KEY_MUSIC_EFFECT);
+	if (soundLevelID != MUSIC_EFFECT_LEVEL_TURN_OFF) {
 		CocosDenshion::SimpleAudioEngine::getInstance()->stopEffect(soundLevelID);
 	}
 }

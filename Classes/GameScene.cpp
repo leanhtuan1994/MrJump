@@ -80,8 +80,8 @@ bool GameScene::init(){
 	}
 
 	if (this->currentLevelSelected == LEVEL_NAME::LEVEL_1) {
-		this->soundLevelID = CocosDenshion::SimpleAudioEngine::getInstance()->playEffect("Mr_Jump_Music_Level_1.wav", true);
-		userdefault->setIntegerForKey("SOUNDLEVELID", soundLevelID);
+		this->soundLevelID = CocosDenshion::SimpleAudioEngine::getInstance()->playEffect(FILEPATH_LEVEL_MUSIC_EFFECT, true);
+		userdefault->setIntegerForKey(USER_DATA_KEY_MUSIC_EFFECT, soundLevelID);
 	}
 
 

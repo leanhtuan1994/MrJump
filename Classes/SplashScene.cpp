@@ -36,20 +36,33 @@ bool SplashScene::init()
         return false;
     }
 
-	CocosDenshion::SimpleAudioEngine::getInstance()->preloadBackgroundMusic("Mr_Jump_Background.wav");
-	CocosDenshion::SimpleAudioEngine::getInstance()->preloadEffect("Mr_Jump_Music_Level_1.wav");
+	/************************************************************************/
+	/*		PRELOAD AUDIO EFFECT IN THE PROJECT                                                                     
+	/************************************************************************/
+	CocosDenshion::SimpleAudioEngine::getInstance()->preloadBackgroundMusic(FILEPATH_BACKGROUND_MUSIC);
+	CocosDenshion::SimpleAudioEngine::getInstance()->preloadEffect(FILEPATH_LEVEL_MUSIC_EFFECT);
 
-
+	/*
+	*	CHECK AND PLAY BACKGROUND MUSIC 
+	*/	
 	if (! CocosDenshion::SimpleAudioEngine::getInstance()->isBackgroundMusicPlaying()) {
-		CocosDenshion::SimpleAudioEngine::getInstance()->playBackgroundMusic("Mr_Jump_Background.wav", true);
+		CocosDenshion::SimpleAudioEngine::getInstance()->playBackgroundMusic(FILEPATH_BACKGROUND_MUSIC, true);
 	}
 
+
+	/*
+	*	SET NOT PLAY EFFECT FOR THE GAME LEVEL 
+	*/
 	auto userdefault = UserDefault::getInstance();
-	userdefault->setIntegerForKey("SOUNDLEVELID", -1);
+	userdefault->setIntegerForKey(USER_DATA_KEY_MUSIC_EFFECT, MUSIC_EFFECT_LEVEL_TURN_OFF);
 
 
-
+	/************************************************************************/
+	/*			SET UPDATE ONE TIME TO REPLACE SCENE - MAIN MENU SCENE                                                                     
+	/************************************************************************/
 	this->scheduleOnce(schedule_selector(SplashScene::gotoMainMenuScene), DISPLAY_TIME_SPLASH_SCENE);
+
+
 
     return true;
 }

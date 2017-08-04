@@ -17,8 +17,8 @@ public:
     // implement the "static create()" method manually
 	CREATE_FUNC(MainMenuScene);
 
-
 	void update(float delta);
+
 
 	bool onTouchBegan(cocos2d::Touch *touch, cocos2d::Event *unused_event);
 
@@ -27,10 +27,11 @@ public:
 	void setMusicEffect();
 
 private:
-	cocos2d::Sprite *tapTopPlay;
-	int tapOpacity = 0;
-	
 
+	int tapOpacity = 0;
+
+
+	cocos2d::Sprite *tapTopPlay;
 	cocos2d::ui::Button *btnSetting;
 };
 
