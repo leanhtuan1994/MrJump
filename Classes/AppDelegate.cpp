@@ -50,7 +50,7 @@ bool AppDelegate::applicationDidFinishLaunching() {
     director->getOpenGLView()->setDesignResolutionSize(designResolutionSize.width, designResolutionSize.height, ResolutionPolicy::EXACT_FIT);
 
     // turn on display FPS
-    director->setDisplayStats(true);
+    director->setDisplayStats(false);
 
     // set FPS. the default value is 1.0/60 if you don't call this
     director->setAnimationInterval(1.0 / 60);
@@ -77,7 +77,11 @@ void AppDelegate::applicationDidEnterBackground() {
 	if (UserDefault::getInstance()->getIntegerForKey(USER_DATA_KEY_IS_PLAY_BACKGROUND_MUSIC) == USER_SETUP_AUDIO::TURN_ON) {
 		if (CocosDenshion::SimpleAudioEngine::getInstance()->isBackgroundMusicPlaying()) {
 			CocosDenshion::SimpleAudioEngine::getInstance()->pauseBackgroundMusic();
-		}
+		} 
+	}
+
+	if (UserDefault::getInstance()->getIntegerForKey(USER_DATA_KEY_IS_PLAY_AUDIO_EFFECT) == USER_SETUP_AUDIO::TURN_ON) {
+		CocosDenshion::SimpleAudioEngine::getInstance()->pauseAllEffects();
 	}
 }
 
@@ -89,8 +93,14 @@ void AppDelegate::applicationWillEnterForeground() {
 
     // if you use SimpleAudioEngine, it must resume here
 	if (UserDefault::getInstance()->getIntegerForKey(USER_DATA_KEY_IS_PLAY_BACKGROUND_MUSIC) == USER_SETUP_AUDIO::TURN_ON) {
-		if (! CocosDenshion::SimpleAudioEngine::getInstance()->isBackgroundMusicPlaying()) {
+		if (!CocosDenshion::SimpleAudioEngine::getInstance()->isBackgroundMusicPlaying() 
+			&& UserDefault::getInstance()->getIntegerForKey(USER_DATA_KEY_MUSIC_EFFECT) == MUSIC_EFFECT_LEVEL_TURN_OFF) {
+
 			CocosDenshion::SimpleAudioEngine::getInstance()->resumeBackgroundMusic();
 		}
+	}
+
+	if (UserDefault::getInstance()->getIntegerForKey(USER_DATA_KEY_MUSIC_EFFECT) != MUSIC_EFFECT_LEVEL_TURN_OFF) {
+		CocosDenshion::SimpleAudioEngine::getInstance()->resumeAllEffects();
 	}
 }

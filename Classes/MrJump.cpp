@@ -91,7 +91,7 @@ void MrJump::setActionOfState() {
 
 	case JUMP:
 		this->setPositionX(this->getPositionX() + MRJUMP_RUNNING_SPEED);
-		this->setPositionY(this->getPositionY() + 9.2f);
+		this->setPositionY(this->getPositionY() + MRJUMP_JUMPING_HEIGHT);
 		break;
 
 	case DEAD:

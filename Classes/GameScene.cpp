@@ -67,13 +67,14 @@ bool GameScene::init(){
 	userDafault = UserDefault::getInstance();
 	this->currentLevelSelected = userDafault->getIntegerForKey("Level");
 
+
 	/* init data is 0 */
 	this->userDafault->setIntegerForKey(USER_DATA_KEY_NUMBER_JUMPS, 0);
 	this->userDafault->setIntegerForKey(USER_DATA_KEY_SCORE_PERCENT, 0);
 
 
 	/************************************************************************/
-	/*			PKAY MUSIC
+	/*							PLAY MUSIC
 	/************************************************************************/
 	int isPlayBackgroundMusic = userDafault->getIntegerForKey(USER_DATA_KEY_IS_PLAY_BACKGROUND_MUSIC);
 	int isPlayAudioEffect = userDafault->getIntegerForKey(USER_DATA_KEY_IS_PLAY_AUDIO_EFFECT);
@@ -85,7 +86,6 @@ bool GameScene::init(){
 
 
 	this->soundLevelID = userDafault->getIntegerForKey(USER_DATA_KEY_MUSIC_EFFECT);
-
 	if (isPlayAudioEffect == USER_SETUP_AUDIO::TURN_ON) {
 		if (this->soundLevelID == MUSIC_EFFECT_LEVEL_TURN_OFF) {
 			if (this->currentLevelSelected == LEVEL_NAME::LEVEL_1) {
@@ -96,6 +96,7 @@ bool GameScene::init(){
 	}
 
 
+
 	/* init level map */
 	this->level = new Level();
 
@@ -103,10 +104,8 @@ bool GameScene::init(){
 	if (currentLevelSelected == LEVEL_NAME::LEVEL_1) {
 		level->loadMap("level1.tmx");
 	}
-
 	/* RETAIN Level to the scene */
 	level->retain();
-
 	/* ADD LEVEL IN THE SCENE */
 	this->addChild(level->getMapLevel(), TAG_ZORDER::MAP);
 	
@@ -332,7 +331,6 @@ void GameScene::setStatusMrJumpDie() {
 	/* Save data */
 	this->userDafault->setIntegerForKey(USER_DATA_KEY_NUMBER_JUMPS, this->numberJumped);
 	this->userDafault->setIntegerForKey(USER_DATA_KEY_SCORE_PERCENT, this->percentWidthOfMrJump);
-
 
 
 	this->addGameOverLayer();
