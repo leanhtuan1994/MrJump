@@ -21,7 +21,7 @@ MrJump * MrJump::create() {
 	player->isGrounded = true;
 
 	/* init physics body */
-	auto body = cocos2d::PhysicsBody::createBox(cocos2d::Size(player->getContentSize().width, player->getContentSize().height - 6), 
+	auto body = cocos2d::PhysicsBody::createBox(cocos2d::Size(player->getContentSize().width - 5, player->getContentSize().height - 6), 
 		cocos2d::PhysicsMaterial(0.0f, 0.0f, 0.0f));
 	body->setRotationEnable(false);
 	body->setLinearDamping(1.0f);

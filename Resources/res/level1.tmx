@@ -50,7 +50,7 @@
   </data>
  </layer>
  <objectgroup name="playerObjects">
-  <object id="5" name="player" x="99.38" y="291.834" width="41.7273" height="39.5758"/>
+  <object id="5" name="player" x="48.88" y="283.334" width="41.7273" height="39.5758"/>
  </objectgroup>
  <objectgroup name="groundObjects">
   <object id="7" x="0" y="390.333" width="1377.82" height="134"/>
@@ -124,71 +124,71 @@
   <object id="84" x="12070" y="475.333" width="20" height="50.6667"/>
  </objectgroup>
  <objectgroup name="enemyObjects">
-  <object id="91" x="782.75" y="326.5">
-   <polygon points="0,0 23.5,55 -24,54.75"/>
+  <object id="91" x="784.692" y="336.5">
+   <polygon points="0,0 18.0579,44 -18.4421,43.8"/>
   </object>
-  <object id="92" x="1087.45" y="326.182">
-   <polygon points="0,0 23.6364,54.9091 -23.4545,55.4545"/>
+  <object id="92" x="1090.22" y="337.182">
+   <polygon points="0,0 19.37,44.5124 -19.2209,44.9545"/>
   </object>
-  <object id="93" x="1154.36" y="326.545">
-   <polygon points="0,0 24.3636,56 -24,55.2727"/>
+  <object id="93" x="1155.93" y="336.045">
+   <polygon points="0,0 14.7922,45 -14.5714,44.4156"/>
   </object>
-  <object id="94" x="2016.55" y="325.455">
-   <polygon points="0,0 24.1818,56.9091 -24.3636,56.7273"/>
+  <object id="94" x="2019.02" y="336.955">
+   <polygon points="0,0 17.208,45.4091 -17.3374,45.264"/>
   </object>
-  <object id="95" x="2083.45" y="326">
-   <polygon points="0,0 24.5455,56.3636 -23.8182,56"/>
+  <object id="95" x="2083.04" y="338">
+   <polygon points="0,0 18.4553,44.3636 -17.9084,44.0774"/>
   </object>
-  <object id="96" x="2150.55" y="324.909">
-   <polygon points="0,0 23.8182,56.7273 -23.8182,56"/>
+  <object id="96" x="2151.55" y="339.409">
+   <polygon points="0,0 17.3182,41.2273 -17.3182,40.6987"/>
   </object>
-  <object id="97" x="3116.63" y="276.125">
-   <polygon points="0,0 24.5,56.875 -25.375,57.625"/>
+  <object id="97" x="3120.02" y="288.625">
+   <polygon points="0,0 18.114,42.5637 -18.761,43.125"/>
   </object>
-  <object id="99" x="3250.13" y="275">
-   <polygon points="0,0 24.5,56.875 -23.75,57"/>
+  <object id="99" x="3251.48" y="286">
+   <polygon points="0,0 18.1528,44.9013 -17.5972,45"/>
   </object>
-  <object id="100" x="4132" y="326.25">
-   <polygon points="0,0 25,56 -23.75,56.25"/>
+  <object id="100" x="4134.47" y="334.25">
+   <polygon points="0,0 16.0256,47.5378 -15.2244,47.75"/>
   </object>
-  <object id="101" x="4632.25" y="225.75">
-   <polygon points="0,0 24.5,57.25 -24.25,57"/>
+  <object id="101" x="4635.53" y="240.75">
+   <polygon points="0,0 17.7154,40.75 -17.5346,40.5721"/>
   </object>
-  <object id="102" x="5027.5" y="393">
-   <polygon points="0,0 23.5,57.25 -23.75,57.25"/>
+  <object id="102" x="5029.97" y="405.5">
+   <polygon points="0,0 17.5317,43.25 -17.7183,43.25"/>
   </object>
-  <object id="103" x="5094.25" y="392.75">
-   <polygon points="0,0 24.25,57.25 -23,57.25"/>
+  <object id="103" x="5097.13" y="407.25">
+   <polygon points="0,0 19.3743,42.25 -18.3757,42.25"/>
   </object>
-  <object id="104" x="6082.25" y="275">
-   <polygon points="0,0 24,56.75 -24,57.25"/>
+  <object id="104" x="6085.25" y="288">
+   <polygon points="0,0 20,44.3592 -20,44.75"/>
   </object>
-  <object id="105" x="7670.67" y="394.333">
-   <polygon points="0,0 23.3333,54.6667 -24.6667,55"/>
+  <object id="105" x="7674.96" y="405.333">
+   <polygon points="0,0 16.0416,43.2364 -16.9584,43.5"/>
   </object>
-  <object id="107" x="7737.33" y="393.667">
-   <polygon points="0,0 24,55.3333 -23.6667,55.3333"/>
+  <object id="107" x="7739.37" y="406.167">
+   <polygon points="0,0 17.958,42.8333 -17.7087,42.8333"/>
   </object>
-  <object id="108" x="7805" y="393.333">
-   <polygon points="0,0 22.6667,55.6667 -24,55.6667"/>
+  <object id="108" x="7803.84" y="404.333">
+   <polygon points="0,0 17.3238,44.1667 -18.3429,44.1667"/>
   </object>
-  <object id="109" x="8382" y="275.333">
-   <polygon points="0,0 25.6667,58 -25,58.3333"/>
+  <object id="109" x="8383.63" y="287.833">
+   <polygon points="0,0 16.0417,46.0686 -15.625,46.3333"/>
   </object>
-  <object id="110" x="10120" y="393">
-   <polygon points="0,0 24.6667,56.6667 -24,56.3333"/>
+  <object id="110" x="10122.6" y="407.5">
+   <polygon points="0,0 17.5708,42.6667 -17.0959,42.4157"/>
   </object>
-  <object id="111" x="10187.7" y="392">
-   <polygon points="0,0 24.3333,58 -24.3333,58"/>
+  <object id="111" x="10188.5" y="404.5">
+   <polygon points="0,0 18.0833,45 -18.0833,45"/>
   </object>
-  <object id="112" x="10254.3" y="391.333">
-   <polygon points="0,0 24.3333,57.6667 -23.6667,57.6667"/>
+  <object id="112" x="10255.6" y="407.833">
+   <polygon points="0,0 17.4896,41.1667 -17.0104,41.1667"/>
   </object>
-  <object id="113" x="12430" y="392.667">
-   <polygon points="0,0 24,55.6667 -24.3333,55.6667"/>
+  <object id="113" x="12432.2" y="400.167">
+   <polygon points="0,0 21.7655,47.1667 -22.0678,47.1667"/>
   </object>
-  <object id="114" x="12494" y="392">
-   <polygon points="0,0 23,56.3333 -23,56.6667"/>
+  <object id="114" x="12493.3" y="399">
+   <polygon points="0,0 20.25,47.3863 -20.25,47.6667"/>
   </object>
   <object id="115" x="12557.3" y="393">
    <polygon points="0,0 23.6667,55.6667 -23.3333,56"/>
@@ -208,8 +208,8 @@
   <object id="120" x="12877" y="391.667">
    <polygon points="0,0 24.3333,57.3333 -24,57"/>
   </object>
-  <object id="121" x="3183.5" y="276">
-   <polygon points="0,0 24,55 -24.5,55.5"/>
+  <object id="121" x="3185.68" y="287">
+   <polygon points="0,0 16.8247,44.5946 -17.1753,45"/>
   </object>
  </objectgroup>
 </map>

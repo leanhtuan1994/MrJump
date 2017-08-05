@@ -19,7 +19,7 @@ Scene* GameScene::createScene()
 	scene->getPhysicsWorld()->setDebugDrawMask(PhysicsWorld::DEBUGDRAW_ALL);
 
 	/* set gravity for physics world */
-	scene->getPhysicsWorld()->setGravity(cocos2d::Vec2(0.0f, -700.0f));
+	scene->getPhysicsWorld()->setGravity(cocos2d::Vec2(GAME_GRAVITY));
 
     
     // 'layer' is an autorelease object
