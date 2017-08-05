@@ -20,12 +20,12 @@
           <Image Name="black_opacity.png" />
           <Image Name="ButtonLevelNormal.png" />
           <Image Name="ButtonLevelSelected.png" />
-          <Image Name="ButtonSoundNormal.png" />
           <Image Name="ButtonSoundSelected.png" />
           <Image Name="chan 1.png" />
           <Image Name="chan 2.png" />
           <Image Name="CloseButtonNormal.png" />
           <Image Name="CloseButtonSelected.png" />
+          <Image Name="CodeStation.png" />
           <Image Name="dau.png" />
           <Image Name="InfoButtonNormal.png" />
           <Image Name="InfoButtonSelected.png" />
@@ -47,11 +47,16 @@
           <Image Name="settingnormalicon.png" />
           <Image Name="settingselectedicon.png" />
           <Image Name="SoundBackgroundButtonNormal.png" />
-          <Image Name="SoundBackgroundButtonSelected.png" />
           <Image Name="TapToPlay.png" />
           <Image Name="tay 1.png" />
           <Image Name="tay 2.png" />
           <Image Name="than.png" />
+          <Image Name="SoundBackgroundButtonNormal_TurnOff.png" />
+          <Image Name="SoundBackgroundButtonSelected_TurnOff.png" />
+          <Image Name="ButtonSoundNormal_TurnOff.png" />
+          <Image Name="ButtonSoundSelected_TurnOff.png" />
+          <Image Name="ButtonSoundNormal.png" />
+          <Image Name="SoundBackgroundButtonSelected.png" />
         </Folder>
         <Project Name="GameOverLayer.csd" Type="Layer" />
         <Project Name="GameScene.csd" Type="Scene" />
@@ -59,6 +64,7 @@
         <Project Name="MainMenuScene.csd" Type="Scene" />
         <Project Name="Player.csd" Type="Skeleton" />
         <Project Name="SettingScene.csd" Type="Scene" />
+        <Project Name="SplashScene.csd" Type="Scene" />
       </RootFolder>
     </Group>
   </SolutionFolder>

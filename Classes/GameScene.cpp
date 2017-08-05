@@ -75,18 +75,26 @@ bool GameScene::init(){
 	/************************************************************************/
 	/*			PKAY MUSIC
 	/************************************************************************/
-	if (CocosDenshion::SimpleAudioEngine::getInstance()->isBackgroundMusicPlaying()) {
+	int isPlayBackgroundMusic = userDafault->getIntegerForKey(USER_DATA_KEY_IS_PLAY_BACKGROUND_MUSIC);
+	int isPlayAudioEffect = userDafault->getIntegerForKey(USER_DATA_KEY_IS_PLAY_AUDIO_EFFECT);
+
+	if ( (isPlayBackgroundMusic == USER_SETUP_AUDIO::TURN_ON )
+		&& (CocosDenshion::SimpleAudioEngine::getInstance()->isBackgroundMusicPlaying()) ) {
 		CocosDenshion::SimpleAudioEngine::getInstance()->pauseBackgroundMusic();
 	}
 
 
 	this->soundLevelID = userDafault->getIntegerForKey(USER_DATA_KEY_MUSIC_EFFECT);
-	if (this->soundLevelID == MUSIC_EFFECT_LEVEL_TURN_OFF) {
-		if (this->currentLevelSelected == LEVEL_NAME::LEVEL_1) {
-			this->soundLevelID = CocosDenshion::SimpleAudioEngine::getInstance()->playEffect(FILEPATH_LEVEL_MUSIC_EFFECT, true);
-			userDafault->setIntegerForKey(USER_DATA_KEY_MUSIC_EFFECT, this->soundLevelID);
+
+	if (isPlayAudioEffect == USER_SETUP_AUDIO::TURN_ON) {
+		if (this->soundLevelID == MUSIC_EFFECT_LEVEL_TURN_OFF) {
+			if (this->currentLevelSelected == LEVEL_NAME::LEVEL_1) {
+				this->soundLevelID = CocosDenshion::SimpleAudioEngine::getInstance()->playEffect(FILEPATH_LEVEL_MUSIC_EFFECT, true);
+				userDafault->setIntegerForKey(USER_DATA_KEY_MUSIC_EFFECT, this->soundLevelID);
+			}
 		}
 	}
+
 
 	/* init level map */
 	this->level = new Level();

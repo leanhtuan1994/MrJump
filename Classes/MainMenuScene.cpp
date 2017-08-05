@@ -122,17 +122,30 @@ void MainMenuScene::gotoLevelSelectionScene() {
 
 /* SET MUSIC EFFECT IN THIS SCENE */
 void MainMenuScene::setMusicEffect() {
+	auto userdefault = UserDefault::getInstance();
+	int isPlayBackgroundMusic = userdefault->getIntegerForKey(USER_DATA_KEY_IS_PLAY_BACKGROUND_MUSIC);
+	int isPlayAudioEffect = userdefault->getIntegerForKey(USER_DATA_KEY_IS_PLAY_AUDIO_EFFECT);
+
 
 	/* SET PLAY BACKGROUND MUSIC */
-	if (! CocosDenshion::SimpleAudioEngine::getInstance()->isBackgroundMusicPlaying()) {
-		CocosDenshion::SimpleAudioEngine::getInstance()->playBackgroundMusic(FILEPATH_BACKGROUND_MUSIC, true);
+	if (isPlayBackgroundMusic == USER_SETUP_AUDIO::TURN_ON) {
+		if (!CocosDenshion::SimpleAudioEngine::getInstance()->isBackgroundMusicPlaying()) {
+			CocosDenshion::SimpleAudioEngine::getInstance()->playBackgroundMusic(FILEPATH_BACKGROUND_MUSIC, true);
+		}
+	} else {
+		if (CocosDenshion::SimpleAudioEngine::getInstance()->isBackgroundMusicPlaying()) {
+			CocosDenshion::SimpleAudioEngine::getInstance()->pauseBackgroundMusic();
+		}
 	}
 
+
 	/* GET ID MUSIC EFFECT THE THE LEVEL SCENE AND STOP IT */
-	auto userdefault = UserDefault::getInstance();
-	int  soundLevelID = userdefault->getIntegerForKey(USER_DATA_KEY_MUSIC_EFFECT);
-	if (soundLevelID != MUSIC_EFFECT_LEVEL_TURN_OFF) {
-		CocosDenshion::SimpleAudioEngine::getInstance()->stopEffect(soundLevelID);
-		userdefault->setIntegerForKey(USER_DATA_KEY_MUSIC_EFFECT, MUSIC_EFFECT_LEVEL_TURN_OFF);
+	if (isPlayAudioEffect == USER_SETUP_AUDIO::TURN_ON) {
+
+		int  soundLevelID = userdefault->getIntegerForKey(USER_DATA_KEY_MUSIC_EFFECT);
+		if (soundLevelID != MUSIC_EFFECT_LEVEL_TURN_OFF) {
+			CocosDenshion::SimpleAudioEngine::getInstance()->stopEffect(soundLevelID);
+			userdefault->setIntegerForKey(USER_DATA_KEY_MUSIC_EFFECT, MUSIC_EFFECT_LEVEL_TURN_OFF);
+		}
 	}
 }

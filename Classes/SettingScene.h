@@ -19,10 +19,20 @@ public:
 	CREATE_FUNC(SettingScene);
 
 
+	void onButtonBackgroundMusicTouchEvent( cocos2d::Ref* sender, cocos2d::ui::Widget::TouchEventType type);
+	void onButtonAudioEffectTouchEvent(cocos2d::Ref* sender, cocos2d::ui::Widget::TouchEventType type);
+
+	void update(float dt);
+
 private:
 	
 	cocos2d::ui::Button *btnCloseSetting;
+	cocos2d::ui::Button *btnBackgroundMusic;
+	cocos2d::ui::Button *btnAudioEffect;
 
+
+	bool isButtonBackgroundMusicStatusChange;
+	bool isButtonAudioEffectStatusChange;
 };
 
 #endif // __SETTING_SCENE_H__

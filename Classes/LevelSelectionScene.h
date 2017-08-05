@@ -19,13 +19,12 @@ public:
 	CREATE_FUNC(LevelSelectionScene);
 
 
-	void gotoGameScene();
-
 private:
 	
 	cocos2d::ui::PageView *pageView;
 	cocos2d::ui::Layout *panelLevel1;
 
+	cocos2d::ui::Button *btnCloseScene;
 
 };
 

@@ -86,11 +86,11 @@ void MrJump::stopRunningAction() {
 void MrJump::setActionOfState() {
 	switch (state) {
 	case RUN:
-	//	this->setPositionX(this->getPositionX() + MRJUMP_RUNNING_SPEED);
+		this->setPositionX(this->getPositionX() + MRJUMP_RUNNING_SPEED);
 		break;
 
 	case JUMP:
-	//	this->setPositionX(this->getPositionX() + MRJUMP_RUNNING_SPEED);
+		this->setPositionX(this->getPositionX() + MRJUMP_RUNNING_SPEED);
 		this->setPositionY(this->getPositionY() + 9.2f);
 		break;
 
