@@ -75,6 +75,11 @@ bool SplashScene::init()
 	userdefault->setIntegerForKey(USER_DATA_KEY_MUSIC_EFFECT, MUSIC_EFFECT_LEVEL_TURN_OFF);
 
 
+	/************************************************************************/
+	/*                                                                      */
+	/************************************************************************/
+	SpriteFrameCache::getInstance()->addSpriteFramesWithFile("JumpAni.plist", "JumpAni.png");
+
 
 
 	/************************************************************************/

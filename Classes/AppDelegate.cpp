@@ -1,6 +1,8 @@
 #include "AppDelegate.h"
 #include "SplashScene.h"
+#include "Definitions.h"
 #include "SimpleAudioEngine.h"
+
 #ifdef SDKBOX_ENABLED
 #include "PluginAdMob/PluginAdMob.h"
 #endif
@@ -36,6 +38,7 @@ bool AppDelegate::applicationDidFinishLaunching() {
 #ifdef SDKBOX_ENABLED
     sdkbox::PluginAdMob::init();
 #endif
+
     // initialize director
     auto director = Director::getInstance();
     auto glview = director->getOpenGLView();
@@ -59,26 +62,35 @@ bool AppDelegate::applicationDidFinishLaunching() {
     auto scene = SplashScene::createScene();
 
 
-	SpriteFrameCache::getInstance()->addSpriteFramesWithFile("JumpAni.plist", "JumpAni.png");
-
     // run
     director->runWithScene(scene);
 
     return true;
 }
 
+
 // This function will be called when the app is inactive. When comes a phone call,it's be invoked too
 void AppDelegate::applicationDidEnterBackground() {
     Director::getInstance()->stopAnimation();
 
     // if you use SimpleAudioEngine, it must be pause
-    CocosDenshion::SimpleAudioEngine::getInstance()->pauseBackgroundMusic();
+	if (UserDefault::getInstance()->getIntegerForKey(USER_DATA_KEY_IS_PLAY_BACKGROUND_MUSIC) == USER_SETUP_AUDIO::TURN_ON) {
+		if (CocosDenshion::SimpleAudioEngine::getInstance()->isBackgroundMusicPlaying()) {
+			CocosDenshion::SimpleAudioEngine::getInstance()->pauseBackgroundMusic();
+		}
+	}
 }
+
+
 
 // this function will be called when the app is active again
 void AppDelegate::applicationWillEnterForeground() {
     Director::getInstance()->startAnimation();
 
     // if you use SimpleAudioEngine, it must resume here
-	CocosDenshion::SimpleAudioEngine::getInstance()->resumeBackgroundMusic();
+	if (UserDefault::getInstance()->getIntegerForKey(USER_DATA_KEY_IS_PLAY_BACKGROUND_MUSIC) == USER_SETUP_AUDIO::TURN_ON) {
+		if (! CocosDenshion::SimpleAudioEngine::getInstance()->isBackgroundMusicPlaying()) {
+			CocosDenshion::SimpleAudioEngine::getInstance()->resumeBackgroundMusic();
+		}
+	}
 }
