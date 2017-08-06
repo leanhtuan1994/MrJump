@@ -316,7 +316,6 @@ void GameScene::setStatusMrJumpDie() {
 	this->mrJump->die();
 
 	mrJump->stopRunningAction();
-	this->sceneWorld->removeAllBodies();
 	this->getEventDispatcher()->removeEventListener(touchListener);
 	this->getEventDispatcher()->removeEventListener(contactListener);
 

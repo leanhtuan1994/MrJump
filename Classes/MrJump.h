@@ -38,6 +38,12 @@ public:
 
 	void die() {
 		state = STATE::DEAD;
+
+		/* action for die */
+		auto actionMoveBy = cocos2d::MoveBy::create(0.35f, cocos2d::Point(-120.0f, 200.0f));
+		auto actionRotate = cocos2d::RotateBy::create(0.2f, -90.0f);
+		this->runAction(actionMoveBy);
+		this->runAction(actionRotate);
 	}
 
 	bool isGrounded;

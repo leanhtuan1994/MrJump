@@ -95,6 +95,7 @@ void MrJump::setActionOfState() {
 		break;
 
 	case DEAD:
+		
 
 		break;
 	}
