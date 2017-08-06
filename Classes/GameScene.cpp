@@ -121,7 +121,7 @@ bool GameScene::init(){
 	edgeNode = Node::create();
 	edgeNode->setPosition( visibleSize.width /2 + origin.x , visibleSize.height/2 + origin.y);
 	edgeNode->setPhysicsBody(edgeBody);
-	this->addChild(edgeNode);
+//	this->addChild(edgeNode);
 
 
 
@@ -216,7 +216,7 @@ void GameScene::update(float delta) {
 	// Update position camera and edgeNode follow mrJump
 	cameraTarget->setPositionX( mrJump->getPositionX() < limitedCameraPositionX ? 
 		visibleSize.width / 2 + origin.x : mrJump->getPositionX() + spaceCameraPositionX);
-	edgeNode->setPositionX( cameraTarget->getPositionX());
+//	edgeNode->setPositionX( cameraTarget->getPositionX());
 
 }
 

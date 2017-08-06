@@ -103,6 +103,9 @@ bool SettingScene::init()
 	btnCloseSetting->addTouchEventListener([](cocos2d::Ref *sender, cocos2d::ui::Widget::TouchEventType type) {
 		switch (type) {
 		case cocos2d::ui::Widget::TouchEventType::BEGAN:
+			if (cocos2d::UserDefault::getInstance()->getIntegerForKey(USER_DATA_KEY_IS_PLAY_AUDIO_EFFECT) == USER_SETUP_AUDIO::TURN_ON) {
+				CocosDenshion::SimpleAudioEngine::getInstance()->playEffect(FILEPATH_BUTTON_MUSIC_EFFECT);
+			}
 			break;
 		case cocos2d::ui::Widget::TouchEventType::MOVED:
 			break;
@@ -122,6 +125,12 @@ bool SettingScene::init()
 
 void SettingScene::onButtonBackgroundMusicTouchEvent(cocos2d::Ref* sender, cocos2d::ui::Widget::TouchEventType type) {
 	switch (type) {
+	case cocos2d::ui::Widget::TouchEventType::BEGAN:
+		if (cocos2d::UserDefault::getInstance()->getIntegerForKey(USER_DATA_KEY_IS_PLAY_AUDIO_EFFECT) == USER_SETUP_AUDIO::TURN_ON) {
+			CocosDenshion::SimpleAudioEngine::getInstance()->playEffect(FILEPATH_BUTTON_MUSIC_EFFECT);
+		}
+		break;
+
 	case cocos2d::ui::Widget::TouchEventType::ENDED:
 		isButtonBackgroundMusicStatusChange = true;
 
@@ -145,6 +154,11 @@ void SettingScene::onButtonBackgroundMusicTouchEvent(cocos2d::Ref* sender, cocos
 
 void SettingScene::onButtonAudioEffectTouchEvent(cocos2d::Ref* sender, cocos2d::ui::Widget::TouchEventType type) {
 	switch (type) {
+	case cocos2d::ui::Widget::TouchEventType::BEGAN:
+		if (cocos2d::UserDefault::getInstance()->getIntegerForKey(USER_DATA_KEY_IS_PLAY_AUDIO_EFFECT) == USER_SETUP_AUDIO::TURN_ON) {
+			CocosDenshion::SimpleAudioEngine::getInstance()->playEffect(FILEPATH_BUTTON_MUSIC_EFFECT);
+		}
+		break;
 	case cocos2d::ui::Widget::TouchEventType::ENDED:
 		isButtonAudioEffectStatusChange = true;
 		int isPlayAudioEfefct = UserDefault::getInstance()->getIntegerForKey(USER_DATA_KEY_IS_PLAY_AUDIO_EFFECT);

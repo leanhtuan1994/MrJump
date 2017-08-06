@@ -20,7 +20,10 @@
           <Image Name="black_opacity.png" />
           <Image Name="ButtonLevelNormal.png" />
           <Image Name="ButtonLevelSelected.png" />
+          <Image Name="ButtonSoundNormal.png" />
+          <Image Name="ButtonSoundNormal_TurnOff.png" />
           <Image Name="ButtonSoundSelected.png" />
+          <Image Name="ButtonSoundSelected_TurnOff.png" />
           <Image Name="chan 1.png" />
           <Image Name="chan 2.png" />
           <Image Name="CloseButtonNormal.png" />
@@ -47,16 +50,13 @@
           <Image Name="settingnormalicon.png" />
           <Image Name="settingselectedicon.png" />
           <Image Name="SoundBackgroundButtonNormal.png" />
+          <Image Name="SoundBackgroundButtonNormal_TurnOff.png" />
+          <Image Name="SoundBackgroundButtonSelected.png" />
+          <Image Name="SoundBackgroundButtonSelected_TurnOff.png" />
           <Image Name="TapToPlay.png" />
           <Image Name="tay 1.png" />
           <Image Name="tay 2.png" />
           <Image Name="than.png" />
-          <Image Name="SoundBackgroundButtonNormal_TurnOff.png" />
-          <Image Name="SoundBackgroundButtonSelected_TurnOff.png" />
-          <Image Name="ButtonSoundNormal_TurnOff.png" />
-          <Image Name="ButtonSoundSelected_TurnOff.png" />
-          <Image Name="ButtonSoundNormal.png" />
-          <Image Name="SoundBackgroundButtonSelected.png" />
         </Folder>
         <Project Name="GameOverLayer.csd" Type="Layer" />
         <Project Name="GameScene.csd" Type="Scene" />

@@ -10,6 +10,7 @@
 #define FILEPATH_ROOTNODE_MAINMENUSCENE		"MainMenuScene.csb"
 #define CHILD_NAME_BUTTON_SETTING			"btnSetting"
 #define CHILD_NAME_SPRITE_TAPTOPLAY			"spriteTapTopPlay"
+#define CHILD_NAME_BUTTON_LEVELWORLD		"btnLevelWorld"
 
 
 USING_NS_CC;
@@ -72,12 +73,36 @@ bool MainMenuScene::init()
 	btnSetting = (cocos2d::ui::Button *) rootNode->getChildByName(CHILD_NAME_BUTTON_SETTING);
 	btnSetting->addTouchEventListener([](cocos2d::Ref *sender, cocos2d::ui::Widget::TouchEventType type) {
 		switch (type) {
+		case cocos2d::ui::Widget::TouchEventType::BEGAN:
+			if (cocos2d::UserDefault::getInstance()->getIntegerForKey(USER_DATA_KEY_IS_PLAY_AUDIO_EFFECT) == USER_SETUP_AUDIO::TURN_ON) {
+				CocosDenshion::SimpleAudioEngine::getInstance()->playEffect(FILEPATH_BUTTON_MUSIC_EFFECT);
+			}
+
+			break;
 		case cocos2d::ui::Widget::TouchEventType::ENDED:
 			auto scene = SettingScene::createScene();
 			Director::getInstance()->replaceScene(TransitionMoveInL::create(TRANSITION_TIME, scene));
 			break;
 		}
 	});
+
+
+	/************************************************************************/
+	/*			GET BUTTON LEVEL WORLD                                                                      
+	/************************************************************************/
+	btnLevelWorld = (cocos2d::ui::Button *) rootNode->getChildByName(CHILD_NAME_BUTTON_LEVELWORLD);
+	btnLevelWorld->addTouchEventListener([](cocos2d::Ref *sender, cocos2d::ui::Widget::TouchEventType type) {
+		switch (type) {
+		case cocos2d::ui::Widget::TouchEventType::BEGAN:
+			if (cocos2d::UserDefault::getInstance()->getIntegerForKey(USER_DATA_KEY_IS_PLAY_AUDIO_EFFECT) == USER_SETUP_AUDIO::TURN_ON) {
+				CocosDenshion::SimpleAudioEngine::getInstance()->playEffect(FILEPATH_BUTTON_MUSIC_EFFECT);
+			}
+			break;
+		}
+	});
+
+
+
 
 
 	/************************************************************************/
@@ -122,7 +147,7 @@ void MainMenuScene::gotoLevelSelectionScene() {
 
 /* SET MUSIC EFFECT IN THIS SCENE */
 void MainMenuScene::setMusicEffect() {
-	auto userdefault = UserDefault::getInstance();
+	userdefault = UserDefault::getInstance();
 	int isPlayBackgroundMusic = userdefault->getIntegerForKey(USER_DATA_KEY_IS_PLAY_BACKGROUND_MUSIC);
 	int isPlayAudioEffect = userdefault->getIntegerForKey(USER_DATA_KEY_IS_PLAY_AUDIO_EFFECT);
 

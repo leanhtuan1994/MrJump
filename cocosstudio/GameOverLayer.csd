@@ -76,10 +76,10 @@
           </ScaleFrame>
         </Timeline>
         <Timeline ActionTag="2112032536" Property="Position">
-          <PointFrame FrameIndex="0" X="333.5016" Y="-289.4283">
+          <PointFrame FrameIndex="0" X="333.5024" Y="-265.0140">
             <EasingData Type="0" />
           </PointFrame>
-          <PointFrame FrameIndex="5" X="333.5000" Y="112.5000">
+          <PointFrame FrameIndex="5" X="333.5002" Y="142.6543">
             <EasingData Type="0" />
           </PointFrame>
         </Timeline>
@@ -156,14 +156,14 @@
             <OutlineColor A="255" R="255" G="0" B="0" />
             <ShadowColor A="255" R="110" G="110" B="110" />
           </AbstractNodeData>
-          <AbstractNodeData Name="lblNumberJumps" ActionTag="2112032536" Tag="22" IconVisible="False" PositionPercentXEnabled="True" PositionPercentYEnabled="True" LeftMargin="333.5016" RightMargin="846.4984" TopMargin="997.4283" BottomMargin="-289.4283" FontSize="36" LabelText="0 JUMPS" VerticalAlignmentType="VT_Center" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
-            <Size X="154.0000" Y="42.0000" />
+          <AbstractNodeData Name="lblNumberJumps" ActionTag="2112032536" Tag="22" IconVisible="False" PositionPercentXEnabled="True" PositionPercentYEnabled="True" LeftMargin="333.5024" RightMargin="863.4976" TopMargin="977.0140" BottomMargin="-265.0140" FontSize="32" LabelText="0 JUMPS" VerticalAlignmentType="VT_Center" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
+            <Size X="137.0000" Y="38.0000" />
             <AnchorPoint />
-            <Position X="333.5016" Y="-289.4283" />
+            <Position X="333.5024" Y="-265.0140" />
             <Scale ScaleX="1.0000" ScaleY="1.0000" />
             <CColor A="255" R="255" G="255" B="255" />
-            <PrePosition X="0.2500" Y="-0.3859" />
-            <PreSize X="0.1154" Y="0.0560" />
+            <PrePosition X="0.2500" Y="-0.3534" />
+            <PreSize X="0.1027" Y="0.0507" />
             <FontResource Type="Normal" Path="assets/Roboto-Black.ttf" Plist="" />
             <OutlineColor A="255" R="255" G="0" B="0" />
             <ShadowColor A="255" R="110" G="110" B="110" />

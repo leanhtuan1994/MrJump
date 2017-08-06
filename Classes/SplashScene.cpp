@@ -54,6 +54,7 @@ bool SplashScene::init()
 	auto userdefault = UserDefault::getInstance();
 	CocosDenshion::SimpleAudioEngine::getInstance()->preloadBackgroundMusic(FILEPATH_BACKGROUND_MUSIC);
 	CocosDenshion::SimpleAudioEngine::getInstance()->preloadEffect(FILEPATH_LEVEL_MUSIC_EFFECT);
+	CocosDenshion::SimpleAudioEngine::getInstance()->preloadEffect(FILEPATH_BUTTON_MUSIC_EFFECT);
 
 
 	/*	CHECK AND PLAY BACKGROUND MUSIC */	

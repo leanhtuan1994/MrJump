@@ -31,8 +31,14 @@ private:
 	int tapOpacity = 0;
 
 
-	cocos2d::Sprite *tapTopPlay;
-	cocos2d::ui::Button *btnSetting;
+	cocos2d::Sprite			*tapTopPlay;
+	cocos2d::ui::Button		*btnSetting;
+	cocos2d::ui::Button		*btnLevelWorld;
+
+
+	cocos2d::UserDefault	*userdefault;
+	int isPlayBackgroundMusic;
+	int isPlayAudioEffect;
 };
 
 #endif // __MAIN_MENU_SCENE_H__

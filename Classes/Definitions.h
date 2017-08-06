@@ -13,14 +13,14 @@
 #define NUM_FRAME_ANIMATION_JUMP		16
 #define ANIMATION_DELAY_TIME_JUMP		0.05f
 
-#define TIME_TOUCH_JUMP					245
-#define MRJUMP_RUNNING_SPEED			5.8f
+#define TIME_TOUCH_JUMP					270
+#define MRJUMP_RUNNING_SPEED			6.0f
 #define MRJUMP_JUMPING_DUARATION		0.25f
-#define MRJUMP_JUMPING_HEIGHT			9.7f
+#define MRJUMP_JUMPING_HEIGHT			10.0f
 
 
 
-#define GAME_GRAVITY					0.0f, -800.0f
+#define GAME_GRAVITY					0.0f, -920.0f
 
 
 #define MRJUMP_COLLISION_BITMASK		0x0001
@@ -32,6 +32,7 @@
 
 #define FILEPATH_BACKGROUND_MUSIC				"Mr_Jump_Background.wav"
 #define FILEPATH_LEVEL_MUSIC_EFFECT				"Mr_Jump_Music_Level_1.wav"
+#define FILEPATH_BUTTON_MUSIC_EFFECT			"Mr_Jump_Button_Music_Effect.wav"
 
 
 #define USER_DATA_KEY_MUSIC_EFFECT				"USERDATAKEYMUSICEFFECT"

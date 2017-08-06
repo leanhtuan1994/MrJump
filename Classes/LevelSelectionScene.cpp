@@ -2,6 +2,7 @@
 #include "GameScene.h"
 #include "MainMenuScene.h"
 #include "Definitions.h"
+#include "SimpleAudioEngine.h"
 
 
 #define FILEPATH_ROOTNODE_LEVELSELECTIONSCENE		"LevelSelectionScene.csb"
@@ -52,6 +53,7 @@ bool LevelSelectionScene::init()
 	panelLevel1->addTouchEventListener([](cocos2d::Ref * sender, cocos2d::ui::Widget::TouchEventType type) {
 		switch (type) {
 		case cocos2d::ui::Widget::TouchEventType::BEGAN:
+			
 			break;
 		case cocos2d::ui::Widget::TouchEventType::ENDED:
 			auto userdefault = UserDefault::getInstance();
@@ -67,7 +69,11 @@ bool LevelSelectionScene::init()
 	btnCloseScene = (cocos2d::ui::Button *) rootNode->getChildByName(CHILD_NAME_BUTTON_CLOSESCENE);
 	btnCloseScene->addTouchEventListener([](cocos2d::Ref *sender, cocos2d::ui::Widget::TouchEventType type ){
 		switch (type) {
-
+		case cocos2d::ui::Widget::TouchEventType::BEGAN:
+			if (cocos2d::UserDefault::getInstance()->getIntegerForKey(USER_DATA_KEY_IS_PLAY_AUDIO_EFFECT) == USER_SETUP_AUDIO::TURN_ON) {
+				CocosDenshion::SimpleAudioEngine::getInstance()->playEffect(FILEPATH_BUTTON_MUSIC_EFFECT);
+			}
+			break;
 			/* Go to MainMenuScene if touch ended */
 		case cocos2d::ui::Widget::TouchEventType::ENDED:
 			Director::getInstance()->replaceScene(TransitionMoveInL::create(TRANSITION_TIME, MainMenuScene::createScene()));
