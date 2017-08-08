@@ -37,6 +37,7 @@ bool GameOverScene::init()
 	this->addChild(rootNode);
 
 
+
 	/* INIT LABEL NUMBER JUMPS */
 	this->lblNumberJumps = (cocos2d::ui::Text *) rootNode->getChildByName(CHILD_NAME_LABEL_NUMBERJUMPS);
 	int numJumps = this->userDefault->getIntegerForKey(USER_DATA_KEY_NUMBER_JUMPS);
@@ -46,10 +47,16 @@ bool GameOverScene::init()
 	
 	/* INIT LABEL SCORE PERCENT */
 	this->lblScorePercent = (cocos2d::ui::Text *) rootNode->getChildByName(CHILD_NAME_LABEL_SCOREPERCENT);
-	int scoreInt = this->userDefault->getIntegerForKey(USER_DATA_KEY_SCORE_PERCENT);
-	std::string scoreString = std::to_string(scoreInt) + "%";
+	float currScore = this->userDefault->getFloatForKey(USER_DATA_KEY_SCORE_PERCENT); 
+	std::string scoreString = std::to_string(int(currScore)) + "%";
 	this->lblScorePercent->setString(scoreString);
 
+
+	/* GET HIGHEST SCORE PERCENT */
+	this->highestScorePercent = userDefault->getIntegerForKey(USER_DATA_KEY_HIGHT_SCORE);
+	if (currScore > highestScorePercent) {
+		userDefault->setFloatForKey(USER_DATA_KEY_HIGHT_SCORE, currScore);
+	}
 
 
 	/* Get btnPlayAgain and Add touch listener */

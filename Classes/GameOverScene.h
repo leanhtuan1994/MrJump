@@ -25,8 +25,11 @@ private:
 	cocos2d::ui::Text *lblScorePercent;
 	cocos2d::ui::Text *lblNumberJumps;
 
-
 	cocos2d::UserDefault *userDefault;
+
+
+	int highestScorePercent;
+
 };
 
 #endif // __GAME_OVER_SCENE_H__

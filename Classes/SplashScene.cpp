@@ -55,6 +55,10 @@ bool SplashScene::init()
 	CocosDenshion::SimpleAudioEngine::getInstance()->preloadBackgroundMusic(FILEPATH_BACKGROUND_MUSIC);
 	CocosDenshion::SimpleAudioEngine::getInstance()->preloadEffect(FILEPATH_LEVEL_MUSIC_EFFECT);
 	CocosDenshion::SimpleAudioEngine::getInstance()->preloadEffect(FILEPATH_BUTTON_MUSIC_EFFECT);
+	CocosDenshion::SimpleAudioEngine::getInstance()->preloadEffect(FILEPATH_DEATH_MUSIC_EFFECT);
+
+//	UserDefault::getInstance()->setFloatForKey(USER_DATA_KEY_HIGHT_SCORE, 0);
+
 
 
 	/*	CHECK AND PLAY BACKGROUND MUSIC */	

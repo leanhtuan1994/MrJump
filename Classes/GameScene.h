@@ -36,6 +36,8 @@ public:
 
 	void setStatusMrJumpDie();
 
+	void drawHighestScore();
+
 private:
 
 	cocos2d::PhysicsWorld*	sceneWorld;
@@ -63,6 +65,9 @@ private:
 	cocos2d::Follow *camera;
 	cocos2d::Sprite *cameraTarget;
 
+	// Line Sprite To Draw Highest Score
+	cocos2d::Sprite *lineHighestSprite;
+
 	// listener 
 	cocos2d::EventListenerTouchOneByOne *touchListener;
 	cocos2d::EventListenerPhysicsContact *contactListener;
@@ -85,7 +90,8 @@ private:
 	/* counting number of jump */
 	int numberJumped;
 
-	int percentWidthOfMrJump;
+	float percentWidthOfMrJump;
+
 
 };
 

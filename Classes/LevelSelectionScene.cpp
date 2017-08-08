@@ -9,6 +9,7 @@
 #define CHILD_NAME_BUTTON_CLOSESCENE				"btnCloseScene"
 #define CHILD_NAME_BUTTON_PAGEVIEW					"PageView_LevelSelection"
 #define CHILD_NAME_BUTTON_PANEL_LEVEL1				"Panel_Level_1"
+#define CHILD_NAME_LABEL_HIGHEST_SCORE				"lblHighestScore"
 
 
 
@@ -62,6 +63,16 @@ bool LevelSelectionScene::init()
 			break;
 		}
 	});
+
+
+	/************************************************************************/
+	/*					 lblHighestScore
+	/************************************************************************/
+	this->lblHighestScore = (cocos2d::ui::Text *) panelLevel1->getChildByName(CHILD_NAME_LABEL_HIGHEST_SCORE);
+	int currScore = cocos2d::UserDefault::getInstance()->getFloatForKey(USER_DATA_KEY_SCORE_PERCENT);
+	std::string scoreString = std::to_string(currScore) + "%";
+	this->lblHighestScore->setString(scoreString);
+
 
 
 

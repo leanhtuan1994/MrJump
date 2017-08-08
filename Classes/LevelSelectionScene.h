@@ -21,10 +21,12 @@ public:
 
 private:
 	
-	cocos2d::ui::PageView *pageView;
-	cocos2d::ui::Layout *panelLevel1;
+	cocos2d::ui::PageView	*pageView;
+	cocos2d::ui::Layout		*panelLevel1;
 
-	cocos2d::ui::Button *btnCloseScene;
+	cocos2d::ui::Button		*btnCloseScene;
+
+	cocos2d::ui::Text		*lblHighestScore;
 
 };
 

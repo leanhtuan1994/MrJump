@@ -16,7 +16,7 @@ Scene* GameScene::createScene()
 {
     // 'scene' is an autorelease object
 	auto scene = Scene::createWithPhysics(); 
-	scene->getPhysicsWorld()->setDebugDrawMask(PhysicsWorld::DEBUGDRAW_ALL);
+//	scene->getPhysicsWorld()->setDebugDrawMask(PhysicsWorld::DEBUGDRAW_ALL);
 
 	/* set gravity for physics world */
 	scene->getPhysicsWorld()->setGravity(cocos2d::Vec2(GAME_GRAVITY));
@@ -97,7 +97,9 @@ bool GameScene::init(){
 
 
 
-	/* init level map */
+	/************************************************************************/
+	/*				INIT LEVEL MAP                                       
+	/************************************************************************/
 	this->level = new Level();
 
 	/* SET LEVEL IN THE GAME */
@@ -106,8 +108,10 @@ bool GameScene::init(){
 	}
 	/* RETAIN Level to the scene */
 	level->retain();
+	level->addDestination(this);
 	/* ADD LEVEL IN THE SCENE */
 	this->addChild(level->getMapLevel(), TAG_ZORDER::MAP);
+	this->drawHighestScore();
 	
 
 	/************************************************************************/
@@ -216,7 +220,6 @@ void GameScene::update(float delta) {
 	// Update position camera and edgeNode follow mrJump
 	cameraTarget->setPositionX( mrJump->getPositionX() < limitedCameraPositionX ? 
 		visibleSize.width / 2 + origin.x : mrJump->getPositionX() + spaceCameraPositionX);
-//	edgeNode->setPositionX( cameraTarget->getPositionX());
 
 }
 
@@ -313,6 +316,13 @@ void GameScene::addGameOverLayer() {
 
 
 void GameScene::setStatusMrJumpDie() {
+
+	/* Play death effect if it turn on */
+	if (UserDefault::getInstance()->getIntegerForKey(USER_DATA_KEY_IS_PLAY_AUDIO_EFFECT) == USER_SETUP_AUDIO::TURN_ON) {
+		CocosDenshion::SimpleAudioEngine::getInstance()->playEffect(FILEPATH_DEATH_MUSIC_EFFECT);
+	}
+
+
 	this->mrJump->die();
 
 	mrJump->stopRunningAction();
@@ -329,13 +339,23 @@ void GameScene::setStatusMrJumpDie() {
 
 	/* Save data */
 	this->userDafault->setIntegerForKey(USER_DATA_KEY_NUMBER_JUMPS, this->numberJumped);
-	this->userDafault->setIntegerForKey(USER_DATA_KEY_SCORE_PERCENT, this->percentWidthOfMrJump);
+	this->userDafault->setFloatForKey(USER_DATA_KEY_SCORE_PERCENT, this->percentWidthOfMrJump);
 
 
 	this->addGameOverLayer();
 }
 
 
+void GameScene::drawHighestScore() {
+	float highestScore = userDafault->getFloatForKey(USER_DATA_KEY_HIGHT_SCORE);
+	float positionHighestScore = highestScore * (level->getWidth() / 100);
+	if (highestScore > 0.0f) {
+
+		this->lineHighestSprite = cocos2d::Sprite::create("LineHighestScore.png");
+		this->lineHighestSprite->setPosition(positionHighestScore, visibleSize.height / 2 + origin.y);
+		this->addChild(this->lineHighestSprite, TAG_ZORDER::MAP);
+	}
+}
 
 
 

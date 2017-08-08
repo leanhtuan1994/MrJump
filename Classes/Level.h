@@ -17,7 +17,15 @@ public:
 
 	cocos2d::TMXTiledMap* getMapLevel();
 
-	cocos2d::TMXTiledMap *mapLevel;
+	void addDestination(cocos2d::Layer *layer);
+
+	void actionForDestination();
+
+
+private:
+
+	cocos2d::TMXTiledMap	*mapLevel;
+	cocos2d::Sprite			*denstinationSprite;
 
 };
 
