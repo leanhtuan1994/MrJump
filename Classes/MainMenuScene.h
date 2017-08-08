@@ -30,13 +30,15 @@ private:
 
 	int tapOpacity = 0;
 
-
+	/* objects in the scene */
 	cocos2d::Sprite			*tapTopPlay;
 	cocos2d::ui::Button		*btnSetting;
 	cocos2d::ui::Button		*btnLevelWorld;
 
-
+	// instance to get user data 
 	cocos2d::UserDefault	*userdefault;
+
+	// flag to check play music 
 	int isPlayBackgroundMusic;
 	int isPlayAudioEffect;
 };

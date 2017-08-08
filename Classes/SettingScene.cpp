@@ -2,7 +2,9 @@
 #include "MainMenuScene.h"
 #include "Definitions.h"
 #include "SimpleAudioEngine.h"
-
+					 
+#define ROOT_NODE_NAME_SETTINGSCENE					"SettingScene.csb"
+#define CHILD_NAME_BUTTON_CLOSESCENE				"btnCloseSetting"
 #define CHILD_NAME_BUTTON_BACKGROUNDMUSIC			"btnBackgroundMusic" 
 #define CHILD_NAME_BUTTON_AUDIOEFFECT				"btnAudioEffect"
 
@@ -20,11 +22,9 @@
 
 
 
-
-
 USING_NS_CC;
-
 using namespace cocostudio::timeline;
+
 
 Scene* SettingScene::createScene()
 {
@@ -53,22 +53,29 @@ bool SettingScene::init()
     }
     
 	/************************************************************************/
-	/*                                                                      */
+	/*					INIT ATTRIBUTES OF SCENE 							*/
 	/************************************************************************/
 	this->isButtonBackgroundMusicStatusChange = false;
 	this->isButtonAudioEffectStatusChange = false;
 
 
-    auto rootNode = CSLoader::createNode("SettingScene.csb");
+	/************************************************************************/
+	/*				INIT ROOT NODE DESIGNED FROM COCOS STUDIO 				*/
+	/************************************************************************/
+    auto rootNode = CSLoader::createNode(ROOT_NODE_NAME_SETTINGSCENE);
     addChild(rootNode);
 
-	btnCloseSetting = (cocos2d::ui::Button *) rootNode->getChildByName("btnCloseSetting");
+
+	/************************************************************************/
+	/*                        GET UI BUTTON FROM ROOTNOTE
+	/************************************************************************/
+	btnCloseSetting = (cocos2d::ui::Button *) rootNode->getChildByName(CHILD_NAME_BUTTON_CLOSESCENE);
 	btnBackgroundMusic = (cocos2d::ui::Button *) rootNode->getChildByName(CHILD_NAME_BUTTON_BACKGROUNDMUSIC);
 	btnAudioEffect = (cocos2d::ui::Button *) rootNode->getChildByName(CHILD_NAME_BUTTON_AUDIOEFFECT);
 
 
 	/************************************************************************/
-	/*                                                                      */
+	/*				SET TEXTURE FOR BACKGROUNDMUSIC FOLLOW USERDATA 
 	/************************************************************************/
 	int isPlayBackgroundMusic = UserDefault::getInstance()->getIntegerForKey(USER_DATA_KEY_IS_PLAY_BACKGROUND_MUSIC);
 	if (isPlayBackgroundMusic == USER_SETUP_AUDIO::TURN_ON ) {
@@ -80,7 +87,7 @@ bool SettingScene::init()
 	}
 
 	/************************************************************************/
-	/*                                                                      */
+	/*               SET TEXTURE FOR AUDIOEFFECT FOLLOW USERDATA 
 	/************************************************************************/
 
 	int isAudioEffect = UserDefault::getInstance()->getIntegerForKey(USER_DATA_KEY_IS_PLAY_AUDIO_EFFECT);
@@ -93,32 +100,18 @@ bool SettingScene::init()
 	}
 					    
 
+	/************************************************************************/
+	/*				    LISTENER TOUCH EVENT FOR BUTTONS
+	/************************************************************************/
 	btnBackgroundMusic->addTouchEventListener(CC_CALLBACK_2(SettingScene::onButtonBackgroundMusicTouchEvent, this));
 	btnAudioEffect->addTouchEventListener(CC_CALLBACK_2(SettingScene::onButtonAudioEffectTouchEvent, this));
+	btnCloseSetting->addTouchEventListener(CC_CALLBACK_2(SettingScene::onButtonCloseSceneTouchEvent, this));
 
 
-	/************************************************************************/
-	/*                                                                      */
-	/************************************************************************/
-	btnCloseSetting->addTouchEventListener([](cocos2d::Ref *sender, cocos2d::ui::Widget::TouchEventType type) {
-		switch (type) {
-		case cocos2d::ui::Widget::TouchEventType::BEGAN:
-			if (cocos2d::UserDefault::getInstance()->getIntegerForKey(USER_DATA_KEY_IS_PLAY_AUDIO_EFFECT) == USER_SETUP_AUDIO::TURN_ON) {
-				CocosDenshion::SimpleAudioEngine::getInstance()->playEffect(FILEPATH_BUTTON_MUSIC_EFFECT);
-			}
-			break;
-		case cocos2d::ui::Widget::TouchEventType::MOVED:
-			break;
-		case cocos2d::ui::Widget::TouchEventType::ENDED:
-			// goto MainMenuScene
-			auto scene = MainMenuScene::createScene();
-			Director::getInstance()->replaceScene(TransitionMoveInR::create(TRANSITION_TIME_MOVE_IN_R, scene));
-			break;
-		}
-	});
-
-
+	// Call update method every frame
 	this->scheduleUpdate();
+
+
 
     return true;
 }
@@ -197,5 +190,22 @@ void SettingScene::update(float dt) {
 			btnAudioEffect->loadTexturePressed(BUTTON_AUDIO_EFFECT_SELECTED_TURNOFF);
 		}
 		isButtonAudioEffectStatusChange = false;
+	}
+}
+
+void SettingScene::onButtonCloseSceneTouchEvent(cocos2d::Ref* sender, cocos2d::ui::Widget::TouchEventType type) {
+	switch (type) {
+	case cocos2d::ui::Widget::TouchEventType::BEGAN:
+		if (cocos2d::UserDefault::getInstance()->getIntegerForKey(USER_DATA_KEY_IS_PLAY_AUDIO_EFFECT) == USER_SETUP_AUDIO::TURN_ON) {
+			CocosDenshion::SimpleAudioEngine::getInstance()->playEffect(FILEPATH_BUTTON_MUSIC_EFFECT);
+		}
+		break;
+	case cocos2d::ui::Widget::TouchEventType::MOVED:
+		break;
+	case cocos2d::ui::Widget::TouchEventType::ENDED:
+		// goto MainMenuScene
+		auto scene = MainMenuScene::createScene();
+		Director::getInstance()->replaceScene(TransitionMoveInR::create(TRANSITION_TIME_MOVE_IN_R, scene));
+		break;
 	}
 }

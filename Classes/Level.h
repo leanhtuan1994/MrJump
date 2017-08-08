@@ -24,8 +24,11 @@ public:
 
 private:
 
+	// TMX Tiled map designed by Tiled
 	cocos2d::TMXTiledMap	*mapLevel;
-	cocos2d::Sprite			*denstinationSprite;
+
+	// destination sprite in the level map
+	cocos2d::Sprite			*destinationSprite;
 
 };
 

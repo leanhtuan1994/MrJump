@@ -6,7 +6,8 @@
 USING_NS_CC;
 
 MrJump::MrJump() {
-
+	visibleSize = cocos2d::Director::getInstance()->getVisibleSize();
+	origin = cocos2d::Director::getInstance()->getVisibleOrigin();
 }
 
 MrJump::~MrJump() {

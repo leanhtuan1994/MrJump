@@ -81,7 +81,7 @@ bool SplashScene::init()
 
 
 	/************************************************************************/
-	/*                                                                      */
+	/*						LOAD SPRITE FRAME CACHE 
 	/************************************************************************/
 	SpriteFrameCache::getInstance()->addSpriteFramesWithFile("JumpAni.plist", "JumpAni.png");
 
@@ -97,7 +97,7 @@ bool SplashScene::init()
     return true;
 }
 
-
+// Replace Scene to Main Menu Scene
 void SplashScene::gotoMainMenuScene(float dt) {
 	auto scene = MainMenuScene::createScene();
 	Director::getInstance()->replaceScene(TransitionFade::create(TRANSITION_TIME, scene));

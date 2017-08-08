@@ -42,15 +42,20 @@ bool LevelSelectionScene::init()
     if ( !Layer::init() ){
         return false;
     }
-    
+   
+	/************************************************************************/
+	/*	               ROOT NODE DESIGNED FROM COCOS STUDIO
+	/************************************************************************/
 	auto rootNode = CSLoader::createNode(FILEPATH_ROOTNODE_LEVELSELECTIONSCENE);
-    addChild(rootNode);
+    this->addChild(rootNode);
 
 
-	// PageView cast to a PageView using it's name
+
+	/************************************************************************/
+	/*						GET PAGE VIEW
+	/************************************************************************/
 	pageView = (cocos2d::ui::PageView *)rootNode->getChildByName(CHILD_NAME_BUTTON_PAGEVIEW);
 	panelLevel1 = (cocos2d::ui::Layout *) pageView->getChildByName(CHILD_NAME_BUTTON_PANEL_LEVEL1);
-
 	panelLevel1->addTouchEventListener([](cocos2d::Ref * sender, cocos2d::ui::Widget::TouchEventType type) {
 		switch (type) {
 		case cocos2d::ui::Widget::TouchEventType::BEGAN:
@@ -93,8 +98,6 @@ bool LevelSelectionScene::init()
 
 		}
 	});
-
-
 	
 
     return true;

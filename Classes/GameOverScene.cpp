@@ -5,6 +5,10 @@
 #include "SimpleAudioEngine.h"
 
 
+
+#define ROOT_NODE_NAME_GAMEOVERSCENE	"GameOverLayer.csb"
+#define CHILD_NAME_BUTTON_PLAYAGIAN		"btnPlayAgain"
+#define CHILD_NAME_BUTTON_CLOSELAYER	"btnCloseLayer"
 #define CHILD_NAME_LABEL_NUMBERJUMPS	"lblNumberJumps"
 #define CHILD_NAME_LABEL_SCOREPERCENT	"lblScorePercent"
 
@@ -17,8 +21,7 @@ bool GameOverScene::init()
 {
     //////////////////////////////
     // 1. super init first
-    if ( !Layer::init() )
-    {
+    if ( !Layer::init() ){
         return false;
     }
 
@@ -26,11 +29,13 @@ bool GameOverScene::init()
 	this->userDefault = cocos2d::UserDefault::getInstance();
 
 
-	/* Add node from cocos studio */
-	auto rootNode = CSLoader::createNode("GameOverLayer.csb");
+	/************************************************************************/
+	/*             INIT ROOT NODE DEIGNED BY COCOS STUDIO 
+	/************************************************************************/
+	auto rootNode = CSLoader::createNode(ROOT_NODE_NAME_GAMEOVERSCENE);
 
 	// Run animation
-	cocostudio::timeline::ActionTimeline *actionTimeline = CSLoader::createTimeline("GameOverLayer.csb");
+	cocostudio::timeline::ActionTimeline *actionTimeline = CSLoader::createTimeline(ROOT_NODE_NAME_GAMEOVERSCENE);
 	rootNode->runAction(actionTimeline);
 	actionTimeline->gotoFrameAndPlay(0, false);
 
@@ -38,14 +43,18 @@ bool GameOverScene::init()
 
 
 
-	/* INIT LABEL NUMBER JUMPS */
+	/************************************************************************/
+	/*                GET UI LABLE NUMBER JUMPED FROM ROOT NODE 
+	/************************************************************************/
 	this->lblNumberJumps = (cocos2d::ui::Text *) rootNode->getChildByName(CHILD_NAME_LABEL_NUMBERJUMPS);
 	int numJumps = this->userDefault->getIntegerForKey(USER_DATA_KEY_NUMBER_JUMPS);
 	std::string numberJumpsString = std::to_string(numJumps) + " JUMPS";
 	this->lblNumberJumps->setString(numberJumpsString);
 
 	
-	/* INIT LABEL SCORE PERCENT */
+	/************************************************************************/
+	/*                GET UI LABLE SCORE FROM ROOT NODE
+	/************************************************************************/
 	this->lblScorePercent = (cocos2d::ui::Text *) rootNode->getChildByName(CHILD_NAME_LABEL_SCOREPERCENT);
 	float currScore = this->userDefault->getFloatForKey(USER_DATA_KEY_SCORE_PERCENT); 
 	std::string scoreString = std::to_string(int(currScore)) + "%";
@@ -59,8 +68,11 @@ bool GameOverScene::init()
 	}
 
 
-	/* Get btnPlayAgain and Add touch listener */
-	btnPlayAgain = (cocos2d::ui::Button *) rootNode->getChildByName("btnPlayAgain");
+	/************************************************************************/
+	/*                GET UI BUTTON PLAY AGIAN FROM ROOT NODE
+	/*						LISTENER TOUCH EVENT 
+	/************************************************************************/
+	btnPlayAgain = (cocos2d::ui::Button *) rootNode->getChildByName(CHILD_NAME_BUTTON_PLAYAGIAN);
 	btnPlayAgain->addTouchEventListener([](cocos2d::Ref *sender, cocos2d::ui::Widget::TouchEventType type) {
 		switch (type) {
 		case cocos2d::ui::Widget::TouchEventType::BEGAN:
@@ -73,8 +85,12 @@ bool GameOverScene::init()
 	});
 
 
-	/* */
-	btnCloseLayer = (cocos2d::ui::Button *) rootNode->getChildByName("btnCloseLayer");
+	/************************************************************************/
+	/*                GET UI BUTTON CLOSE LAYER FROM ROOT NODE
+	/*						LISTENER TOUCH EVENT
+	/*					REPLACE SCENE TO MAIN MENU SCENE 
+	/************************************************************************/
+	btnCloseLayer = (cocos2d::ui::Button *) rootNode->getChildByName(CHILD_NAME_BUTTON_CLOSELAYER);
 	btnCloseLayer->addTouchEventListener([](cocos2d::Ref *sender, cocos2d::ui::Widget::TouchEventType type) {
 		switch (type) {
 		case cocos2d::ui::Widget::TouchEventType::BEGAN:

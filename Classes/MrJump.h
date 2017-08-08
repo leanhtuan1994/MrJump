@@ -53,8 +53,8 @@ public:
 	/* attributes of mr jump */
 	STATE state;
 
-	cocos2d::Size visibleSize = cocos2d::Director::getInstance()->getVisibleSize();
-	cocos2d::Vec2 origin = cocos2d::Director::getInstance()->getVisibleOrigin();
+	cocos2d::Size visibleSize;
+	cocos2d::Vec2 origin;
 
 };
 

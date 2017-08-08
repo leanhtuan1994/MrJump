@@ -18,19 +18,26 @@ public:
     // implement the "static create()" method manually
 	CREATE_FUNC(SettingScene);
 
-
+	// Listener  touch event for Button Background Music 
 	void onButtonBackgroundMusicTouchEvent( cocos2d::Ref* sender, cocos2d::ui::Widget::TouchEventType type);
+
+	// Listener  touch event for Button Music Effect
 	void onButtonAudioEffectTouchEvent(cocos2d::Ref* sender, cocos2d::ui::Widget::TouchEventType type);
 
+	// Listener  touch event for Button Close Scene
+	void onButtonCloseSceneTouchEvent(cocos2d::Ref* sender, cocos2d::ui::Widget::TouchEventType type);
+
+	// update scene for every frame
 	void update(float dt);
 
 private:
 	
+	// UI Button Object 
 	cocos2d::ui::Button *btnCloseSetting;
 	cocos2d::ui::Button *btnBackgroundMusic;
 	cocos2d::ui::Button *btnAudioEffect;
 
-
+	// flag to listen touch event 
 	bool isButtonBackgroundMusicStatusChange;
 	bool isButtonAudioEffectStatusChange;
 };
