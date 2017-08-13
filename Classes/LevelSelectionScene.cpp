@@ -74,8 +74,10 @@ bool LevelSelectionScene::init()
 	/*					 lblHighestScore
 	/************************************************************************/
 	this->lblHighestScore = (cocos2d::ui::Text *) panelLevel1->getChildByName(CHILD_NAME_LABEL_HIGHEST_SCORE);
-	int currScore = cocos2d::UserDefault::getInstance()->getFloatForKey(USER_DATA_KEY_HIGHT_SCORE);
-	std::string scoreString = std::to_string(currScore) + "%";
+	int currScore = (int) cocos2d::UserDefault::getInstance()->getFloatForKey(USER_DATA_KEY_HIGHT_SCORE);
+	std::ostringstream scoreStream;
+	scoreStream << currScore;
+	std::string scoreString = scoreStream.str() + "%";
 	this->lblHighestScore->setString(scoreString);
 
 
@@ -102,3 +104,4 @@ bool LevelSelectionScene::init()
 
     return true;
 }
+

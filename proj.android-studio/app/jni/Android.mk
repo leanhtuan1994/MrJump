@@ -16,10 +16,14 @@ LOCAL_SRC_FILES := hellocpp/main.cpp \
 ../../../Classes/GameScene.cpp \
 ../../../Classes/Ground.cpp \
 ../../../Classes/Level.cpp \
+../../../Classes/Hazard.cpp \
+../../../Classes/Sea.cpp \
 ../../../Classes/LevelSelectionScene.cpp \
 ../../../Classes/MainMenuScene.cpp \
 ../../../Classes/MrJump.cpp \
-../../../Classes/SplashScene.cpp
+../../../Classes/SplashScene.cpp \
+../../../Classes/GameOverScene.cpp \
+../../../Classes/SettingScene.cpp
 
 
 LOCAL_CPPFLAGS := -DSDKBOX_ENABLED

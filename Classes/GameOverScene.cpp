@@ -48,7 +48,9 @@ bool GameOverScene::init()
 	/************************************************************************/
 	this->lblNumberJumps = (cocos2d::ui::Text *) rootNode->getChildByName(CHILD_NAME_LABEL_NUMBERJUMPS);
 	int numJumps = this->userDefault->getIntegerForKey(USER_DATA_KEY_NUMBER_JUMPS);
-	std::string numberJumpsString = std::to_string(numJumps) + " JUMPS";
+	std::ostringstream jumpStringStream;
+	jumpStringStream << numJumps;
+	std::string numberJumpsString = jumpStringStream.str() + " JUMPS";
 	this->lblNumberJumps->setString(numberJumpsString);
 
 	
@@ -56,9 +58,10 @@ bool GameOverScene::init()
 	/*                GET UI LABLE SCORE FROM ROOT NODE
 	/************************************************************************/
 	this->lblScorePercent = (cocos2d::ui::Text *) rootNode->getChildByName(CHILD_NAME_LABEL_SCOREPERCENT);
-	float currScore = this->userDefault->getFloatForKey(USER_DATA_KEY_SCORE_PERCENT); 
-	std::string scoreString = std::to_string(int(currScore)) + "%";
-	this->lblScorePercent->setString(scoreString);
+	int currScore = this->userDefault->getFloatForKey(USER_DATA_KEY_SCORE_PERCENT); 
+	std::ostringstream scoreString;
+	scoreString << currScore;
+	this->lblScorePercent->setString(std::string(scoreString.str()) + "%");
 
 
 	/* GET HIGHEST SCORE PERCENT */
